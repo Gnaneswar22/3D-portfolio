@@ -1,0 +1,1206 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=0.9">
+    <title>Gnaneswar - Portfolio</title>
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    
+    <style>
+        /* Base styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            /* Restore original font */
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+        }
+        
+        body {
+            background: #000;
+            color: #fff;
+            overflow-x: hidden;
+            position: relative;
+        }
+        
+        /* Loading screen */
+        .loader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #000;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+        }
+        
+        .loader-text {
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+        }
+        
+        .loader-bar {
+            width: 200px;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 2px;
+            overflow: hidden;
+        }
+        
+        .loader-progress {
+            height: 100%;
+            width: 0;
+            background: linear-gradient(to right, #00ffff, #ff00ff);
+            animation: loading 2s ease-in-out forwards;
+        }
+        
+        @keyframes loading {
+            0% { width: 0; }
+            100% { width: 100%; }
+        }
+        
+        /* Gradient and blur */
+        .image-gradient {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.7;
+            pointer-events: none;
+            z-index: -1;
+        }
+        
+        .layer-blur {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            backdrop-filter: blur(80px);
+            pointer-events: none;
+            z-index: -1;
+        }
+        
+        /* Container */
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            position: relative;
+            z-index: 10;
+        }
+        
+        /* Header */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 60px;
+            position: relative;
+            z-index: 1000;
+        }
+        
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+        }
+        
+        nav {
+            display: flex;
+            gap: 30px;
+            position: relative;
+            z-index: 1000;
+        }
+        
+        nav a {
+            text-decoration: none;
+            color: #fff;
+            font-size: 1rem;
+            position: relative;
+            z-index: 1000;
+            cursor: pointer !important;
+            pointer-events: auto !important;
+        }
+        
+        nav a:hover {
+            color: #00ffff;
+        }
+        
+        /* Main content */
+        main {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 40px;
+            height: 70vh;
+            position: relative;
+        }
+        
+        .content {
+            max-width: 600px;
+            z-index: 5;
+        }
+        
+        .tag-box {
+            margin-bottom: 20px;
+        }
+        
+        .tag {
+            display: inline-block;
+            padding: 8px 16px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 30px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            margin-bottom: 20px;
+        }
+        
+        .description {
+            color: rgba(255, 255, 255, 0.7);
+            line-height: 1.6;
+            margin-bottom: 30px;
+            max-width: 500px;
+        }
+        
+        .buttons {
+            display: flex;
+            gap: 20px;
+        }
+        
+        .btn-get-started {
+            display: inline-block;
+            padding: 12px 24px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 30px;
+            color: #fff;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+            z-index: 1000;
+            cursor: pointer !important;
+            pointer-events: auto !important;
+        }
+        
+        .btn-get-started:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-3px);
+        }
+        
+        /* 3D Model */
+        .robot-3d{
+    position: absolute;
+    top: 0;
+    right: -25%;
+}
+
+        /* Remove Spline watermark */
+        .robot-3d::part(watermark) {
+            display: none !important;
+            opacity: 0 !important;
+            visibility: hidden !important;
+        }
+        
+        /* Cursor trail */
+        .trail {
+            position: absolute;
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 9999;
+            animation: fade 1s ease-out forwards;
+        }
+        
+        @keyframes fade {
+            0% { transform: scale(1); opacity: 1; }
+            100% { transform: scale(0); opacity: 0; }
+        }
+        
+        /* Skills Section Styling */
+        .skills-section {
+            /* Updated background to use #46007B with black gradient */
+            background: linear-gradient(90deg, #000000 0%, #000000 50%, #3b1a54 100%);
+            color: #ffffff;
+            min-height: 80vh;
+            padding: 100px 20px 50px;
+            position: relative;
+            overflow: hidden;
+            z-index: 10;
+        }
+        
+        .skills-content {
+            max-width: 1500px;
+            margin: 0 auto;
+            text-align: center;
+            position: relative;
+            z-index: 20;
+        }
+        
+        .skills-title {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 60px;
+            text-align: center;
+            position: relative;
+            z-index: 30;
+        }
+        
+        /* Skills Wheel Styling */
+        .skills-wheel-container {
+            position: relative;
+            width: 100%;
+            height: 500px;
+            margin: 0 auto;
+            perspective: 1000px;
+            z-index: 40;
+        }
+        
+        .central-skill {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 200px;
+            height: 200px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            z-index: 100;
+            background: rgba(70, 0, 123, 0.3);
+            border-radius: 50%;
+            padding: 20px;
+            box-shadow: 0 0 70px rgba(70, 0, 123, 0.7);
+            text-align: center;
+            pointer-events: auto;
+        }
+        
+        .central-skill-icon {
+            width: 70px;
+            height: 70px;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .central-skill-icon img {
+            max-width: 100%;
+            max-height: 100%;
+            filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.7));
+        }
+        
+        .central-skill h3 {
+            font-size: 2rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: #ffffff;
+        }
+        
+        .central-skill-description {
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.9);
+            line-height: 1.4;
+            max-width: 200px;
+        }
+        
+        .orbital-circle {
+            position: absolute;
+            width: 500px;
+            height: 500px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            pointer-events: none;
+            z-index: 50;
+        }
+        
+        .tech-icon {
+            position: absolute;
+            width: 70px;
+            height: 70px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer !important;
+            transition: all 0.3s ease;
+            z-index: 60;
+            pointer-events: auto !important;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            backdrop-filter: blur(5px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+        
+        .tech-icon img {
+            max-width: 80%;
+            max-height: 80%;
+            transition: all 0.3s ease;
+            filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.5));
+        }
+        
+        .tech-icon:hover img {
+            transform: scale(1.2);
+            filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.8));
+        }
+        
+        .tech-icon .tech-name {
+            position: absolute;
+            bottom: -20px;
+            font-size: 12px;
+            color: white;
+            white-space: nowrap;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .tech-icon:hover .tech-name {
+            opacity: 1;
+        }
+        
+        /* Responsive adjustments */
+        @media (max-width: 1200px) {
+            main {
+                flex-direction: column-reverse; /* Model on top, content below */
+                height: auto;
+                padding-bottom: 40px;
+            }
+            
+            .content {
+                max-width: 100%;
+                margin-top: 20px;
+                z-index: 5;
+            }
+            
+            .robot-3d {
+                position: relative;
+                width: 100%;
+                height: 350px;
+                right: auto;
+                top: auto;
+                transform: none;
+                margin-top: 20px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            header {
+                flex-direction: column;
+                gap: 20px;
+            }
+            
+            nav {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 15px;
+            }
+            
+            main {
+                height: auto;
+                padding: 0;
+                flex-direction: column-reverse; /* Model on top, content below */
+            }
+            
+            .content {
+                padding: 0 10px;
+                margin-top: 30px;
+                margin-bottom: 50px;
+            }
+            
+                   .robot-3d {
+                height: 800px;
+               
+            }
+            .robot-3d{
+    position: absolute;
+    top: -230px;
+  
+}
+.content-container{
+    margin-top: 80%;
+    z-index:999 ;
+    background-color: #000;
+}
+            .orbital-circle {
+                width: 300px;
+                height: 300px;
+            }
+            
+            .central-skill {
+                width: 180px;
+                height: 180px;
+            }
+            
+            .central-skill-icon {
+                width: 50px;
+                height: 50px;
+            }
+            
+            .tech-icon {
+                width: 50px;
+                height: 50px;
+            }
+            
+            .central-skill h3 {
+                font-size: 1.5rem;
+            }
+            
+            .central-skill-description {
+                font-size: 0.7rem;
+            }
+            
+            .skills-title {
+                font-size: 2.5rem;
+            }
+            
+            .buttons {
+                flex-direction: column;
+                gap: 15px;
+                align-items: flex-start;
+            }
+            
+            .btn-get-started {
+                display: block;
+                width: 100%;
+                text-align: center;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .robot-3d {
+                height: 600px;
+               
+            }
+            .robot-3d{
+    position: absolute;
+    top: -180px;
+  
+}
+.content-container{
+    margin-top: 80%;
+    z-index:999 ;
+    background-color: #000;
+}
+            
+            h1 {
+                font-size: 2rem !important;
+            }
+            
+            .description {
+                font-size: 0.9rem !important;
+            }
+            
+            .skills-title {
+                font-size: 2rem;
+            }
+            
+            nav {
+                gap: 10px;
+            }
+            
+            nav a {
+                font-size: 0.9rem;
+            }
+        }
+
+        /* Hamburger Menu Styles */
+.hamburger-menu {
+    display: none;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 30px;
+    height: 20px;
+    cursor: pointer;
+    z-index: 2000;
+    position: relative;
+}
+
+.hamburger-menu span {
+    display: block;
+    height: 3px;
+    width: 100%;
+    background-color: #fff;
+    border-radius: 3px;
+    transition: all 0.3s ease;
+}
+
+/* Mobile navigation */
+.mobile-nav {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: 80%;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.95);
+    backdrop-filter: blur(10px);
+    z-index: 1500;
+    transition: right 0.4s cubic-bezier(0.77, 0.2, 0.05, 1.0);
+    display: flex;
+    flex-direction: column;
+    padding: 80px 20px 20px;
+    box-shadow: -5px 0 15px rgba(0, 0, 0, 0.5);
+}
+
+.mobile-nav.active {
+    right: 0;
+}
+
+.mobile-nav a {
+    padding: 15px 0;
+    font-size: 1.2rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    text-decoration: none;
+    color: #fff;
+    transition: color 0.3s ease;
+    display: block;
+}
+
+.mobile-nav a:hover {
+    color: #00ffff;
+}
+
+/* Overlay for mobile menu */
+.menu-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 1400;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+}
+
+.menu-overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* Hamburger animation */
+.hamburger-menu.active span:nth-child(1) {
+    transform: translateY(8px) rotate(45deg);
+}
+
+.hamburger-menu.active span:nth-child(2) {
+    opacity: 0;
+}
+
+.hamburger-menu.active span:nth-child(3) {
+    transform: translateY(-8px) rotate(-45deg);
+}
+
+/* Dropdown Menu Styles */
+.dropdown {
+    position: relative;
+}
+
+.dropdown-content {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background: rgba(0, 0, 0, 0.9);
+    min-width: 200px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    z-index: 1100;
+    border-radius: 8px;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(10px);
+    transition: all 0.3s ease;
+}
+
+.dropdown:hover .dropdown-content {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.dropdown-content a {
+    color: white;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    transition: all 0.2s ease;
+}
+
+.dropdown-content a:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    color: #00ffff;
+}
+
+.dropdown-content a:last-child {
+    border-bottom: none;
+}
+
+/* Mobile dropdown */
+.mobile-dropdown {
+    overflow: hidden;
+}
+
+.mobile-dropdown-content {
+    background: rgba(0, 0, 0, 0.3);
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+}
+
+.mobile-dropdown-content a {
+    padding-left: 30px;
+    font-size: 1rem;
+}
+
+.mobile-dropdown.active .mobile-dropdown-content {
+    max-height: 500px;
+}
+
+.mobile-dropdown-toggle {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.mobile-dropdown-toggle .arrow {
+    transition: transform 0.3s ease;
+}
+
+.mobile-dropdown.active .mobile-dropdown-toggle .arrow {
+    transform: rotate(180deg);
+}
+
+/* Responsive adjustments for navigation */
+@media (max-width: 768px) {
+    nav {
+        display: none; /* Hide desktop nav on mobile */
+    }
+    
+    .hamburger-menu {
+        display: flex; /* Show hamburger on mobile */
+    }
+    
+    header {
+        flex-direction: row !important;
+        justify-content: space-between;
+        padding: 0 10px;
+    }
+}
+    </style>
+</head>
+<body>
+    <!-- Loading Screen -->
+    <div class="loader">
+        <div class="loader-text">Loading...</div>
+        <div class="loader-bar">
+            <div class="loader-progress"></div>
+        </div>
+    </div>
+
+    <img class="image-gradient" src="gradient.png" alt="gradient">
+    <div class="layer-blur"></div>
+
+    <div class="container">
+        <header>
+            <h1 data-aos="fade-down" data-aos-duration="1500" class="logo">Gnaneswar</h1>
+
+           <!-- Add this right after your <header> opening tag, before the logo -->
+<div class="hamburger-menu">
+    <span></span>
+    <span></span>
+    <span></span>
+</div>
+
+<!-- Add this right after the closing </header> tag -->
+<div class="mobile-nav">
+    <a href="#skills">Skills</a>
+    <a href="#education">Education</a>
+    <a href="#projects">Projects</a>
+    <div class="mobile-dropdown">
+        <a href="#certifications" class="mobile-dropdown-toggle">
+            Certifications
+            <span class="arrow">▼</span>
+        </a>
+        <div class="mobile-dropdown-content">
+            <a href="#internships">Internships</a>
+            <a href="#courses">Online Courses</a>
+            <a href="#workshops">Workshops</a>
+        </div>
+    </div>
+    <a href="#awards">Honors & Awards</a>
+</div>
+
+<div class="menu-overlay"></div>
+
+<!-- Update your desktop navigation to include dropdown -->
+<nav>
+    <a data-aos="fade-down" data-aos-duration="1500" href="#skills">Skills</a>
+    <a data-aos="fade-down" data-aos-duration="2000" href="#education">Education</a>
+    <a data-aos="fade-down" data-aos-duration="2500" href="#projects">Projects</a>
+    <div class="dropdown">
+        <a data-aos="fade-down" data-aos-duration="3000" href="#certifications">Certifications</a>
+        <div class="dropdown-content">
+            <a href="#internships">Internships</a>
+            <a href="#courses">Online Courses</a>
+            <a href="#workshops">Workshops</a>
+        </div>
+    </div>
+    <a data-aos="fade-down" data-aos-duration="3000" href="#awards">Honors & Awards</a>
+</nav>
+
+<!-- Add this JavaScript at the end of your existing script, before the closing </script> tag -->
+<script>
+// Hamburger menu functionality
+const hamburger = document.querySelector('.hamburger-menu');
+const mobileNav = document.querySelector('.mobile-nav');
+const menuOverlay = document.querySelector('.menu-overlay');
+const mobileDropdowns = document.querySelectorAll('.mobile-dropdown');
+
+// Toggle mobile menu
+hamburger.addEventListener('click', function() {
+    this.classList.toggle('active');
+    mobileNav.classList.toggle('active');
+    menuOverlay.classList.toggle('active');
+    
+    // Prevent scrolling when menu is open
+    if (mobileNav.classList.contains('active')) {
+        document.body.style.overflow = 'hidden';
+    } else {
+        document.body.style.overflow = 'auto';
+    }
+});
+
+// Close menu when clicking outside
+menuOverlay.addEventListener('click', function() {
+    hamburger.classList.remove('active');
+    mobileNav.classList.remove('active');
+    menuOverlay.classList.remove('active');
+    document.body.style.overflow = 'auto';
+});
+
+// Mobile dropdown toggles
+mobileDropdowns.forEach(dropdown => {
+    const toggle = dropdown.querySelector('.mobile-dropdown-toggle');
+    
+    toggle.addEventListener('click', function(e) {
+        e.preventDefault();
+        dropdown.classList.toggle('active');
+    });
+});
+
+// Close mobile menu when clicking on a link
+document.querySelectorAll('.mobile-nav a:not(.mobile-dropdown-toggle)').forEach(link => {
+    link.addEventListener('click', function() {
+        hamburger.classList.remove('active');
+        mobileNav.classList.remove('active');
+        menuOverlay.classList.remove('active');
+        document.body.style.overflow = 'auto';
+    });
+});
+</script>
+        </header>
+
+        <main>
+            <!-- 3D Model is now above content in the DOM for mobile view -->
+            <spline-viewer 
+                data-aos="fade-zoom-in"
+                data-aos-easing="ease-in-back"
+                data-aos-delay="300"
+                data-aos-offset="0" 
+                data-aos-duration="3000"  
+                class="robot-3d"   
+                url="https://prod.spline.design/Qr2knMM4aKElH8x7/scene.splinecode">
+            </spline-viewer>
+        <div class="content-container">
+            <div class="content" style="margin-top: 80px;">
+                <div data-aos="fade-zoom-in"
+                    data-aos-easing="ease-in-back"
+                    data-aos-delay="300"
+                    data-aos-offset="0" 
+                    data-aos-duration="1500" 
+                    class="tag-box">
+                    <div class="tag">INTRODUCING ∧</div>
+                </div>
+
+                <h1 style="font-size: 2.4rem;" data-aos="fade-zoom-in"
+                    data-aos-easing="ease-in-back"
+                    data-aos-delay="300"
+                    data-aos-offset="0" 
+                    data-aos-duration="2000">
+                    FRONTEND WEB<br>DEVELOPER (REACT)
+                </h1>
+
+                <p style="font-size: 1rem;" data-aos="fade-zoom-in"
+                    data-aos-easing="ease-in-back"
+                    data-aos-delay="300"
+                    data-aos-offset="0" 
+                    data-aos-duration="2500"  
+                    class="description">
+                    Building modern, fast, and responsive web interfaces using React.js. Passionate about clean code and seamless user experiences.
+                </p>
+
+                <div data-aos="fade-zoom-in"
+                    data-aos-easing="ease-in-back"
+                    data-aos-delay="300"
+                    data-aos-offset="0" 
+                    data-aos-duration="3000"  
+                    class="buttons">
+                    <a href="#" class="btn-get-started">Resume</a>
+                    <a href="#" class="btn-get-started">Contact</a>
+                </div>
+            </div>
+        </div>
+        </main>
+    </div>
+
+    <!-- Skills Section -->
+    <section id="skills" class="skills-section">
+        <div class="skills-content">
+            <h1 class="skills-title">My Skills</h1>
+            
+            <div class="skills-wheel-container">
+                <!-- Central Skill -->
+                <div class="central-skill">
+                    <div class="central-skill-icon">
+                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" alt="React">
+                    </div>
+                    <h3>React</h3>
+                    <p class="central-skill-description">
+                        Building modern, fast, and responsive web interfaces using React.js. Proficient in state management, hooks, and component architecture.
+                    </p>
+                </div>
+                
+                <!-- Orbital Circle -->
+                <div class="orbital-circle">
+                    <!-- Technology Icons will be dynamically placed here by JavaScript -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script type="module" src="https://unpkg.com/@splinetool/viewer@1.9.98/build/spline-viewer.js"></script>
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    
+    <script>
+     // Initialize AOS
+document.addEventListener('DOMContentLoaded', function() {
+    // Hide loader after page loads
+    setTimeout(() => {
+        document.querySelector('.loader').style.display = 'none';
+    }, 2000);
+    
+    // Initialize AOS
+    AOS.init();
+    
+    // Multiple approaches to remove Spline watermark
+    function removeWatermark() {
+        // Approach 1: Use CSS custom properties
+        const splineViewer = document.querySelector('spline-viewer');
+        if (splineViewer) {
+            splineViewer.style.setProperty('--watermark-display', 'none');
+        }
+        
+        // Approach 2: Try to access shadow DOM
+        if (splineViewer && splineViewer.shadowRoot) {
+            // Try to add style to shadow DOM
+            const style = document.createElement('style');
+            style.textContent = '.watermark, [class*="watermark"] { display: none !important; opacity: 0 !important; visibility: hidden !important; }';
+            splineViewer.shadowRoot.appendChild(style);
+            
+            // Try to find and remove watermark directly
+            const watermarks = splineViewer.shadowRoot.querySelectorAll('.watermark, [class*="watermark"]');
+            watermarks.forEach(watermark => {
+                watermark.style.display = 'none';
+                watermark.remove();
+            });
+        }
+        
+        // Approach 3: Add a global style that might affect shadow DOM
+        const globalStyle = document.createElement('style');
+        globalStyle.textContent = `
+            spline-viewer::part(watermark),
+            spline-viewer::shadow(.watermark),
+            spline-viewer::shadow([class*="watermark"]) {
+                display: none !important;
+                opacity: 0 !important;
+                visibility: hidden !important;
+            }
+        `;
+        document.head.appendChild(globalStyle);
+        
+        // Approach 4: Try to use MutationObserver to catch watermark when it's added
+        const observer = new MutationObserver(mutations => {
+            for (const mutation of mutations) {
+                if (mutation.addedNodes) {
+                    for (const node of mutation.addedNodes) {
+                        if (node.classList && 
+                            (node.classList.contains('watermark') || 
+                             node.className.includes('watermark'))) {
+                            node.style.display = 'none';
+                            node.remove();
+                        }
+                    }
+                }
+            }
+        });
+        
+        if (splineViewer) {
+            observer.observe(splineViewer, { childList: true, subtree: true });
+        }
+    }
+    
+    // Try multiple times to remove watermark
+    removeWatermark();
+    setTimeout(removeWatermark, 1000);
+    setTimeout(removeWatermark, 3000);
+    setTimeout(removeWatermark, 5000);
+    
+    // Skills with their icons and descriptions
+    const skills = [
+        {
+            name: 'React',
+            icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg',
+            description: 'Building modern, fast, and responsive web interfaces using React.js. Proficient in state management, hooks, and component architecture.'
+        },
+        {
+            name: 'JavaScript',
+            icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg',
+            description: 'Developing interactive web applications using modern JavaScript (ES6+). Proficient in DOM manipulation and asynchronous programming.'
+        },
+        {
+            name: 'HTML5',
+            icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg',
+            description: 'Creating semantic and accessible web pages using HTML5 features. Expertise includes proper document structure and best practices.'
+        },
+        {
+            name: 'CSS3',
+            icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg',
+            description: 'Crafting responsive and visually appealing interfaces using CSS3. Experienced with Flexbox, Grid, animations, and transitions.'
+        },
+        {
+            name: 'Node.js',
+            icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg',
+            description: 'Building scalable backend services with Node.js. Proficient with event-driven architecture and asynchronous programming.'
+        },
+        {
+            name: 'TypeScript',
+            icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg',
+            description: 'Writing type-safe code with TypeScript to improve code quality and developer experience.'
+        },
+        {
+            name: 'Python',
+            icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg',
+            description: 'Developing applications and scripts using Python. Experienced with data analysis and automation.'
+        },
+        {
+            name: 'MongoDB',
+            icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg',
+            description: 'Designing and implementing NoSQL database solutions with MongoDB. Skilled in schema design and queries.'
+        },
+        {
+            name: 'Git',
+            icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg',
+            description: 'Managing code using Git version control. Proficient with branching strategies and collaborative workflows.'
+        },
+        {
+            name: 'Figma',
+            icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/figma/figma-original.svg',
+            description: 'Creating and implementing designs using Figma. Experienced with UI/UX design principles and prototyping.'
+        },
+        {
+            name: 'Next.js',
+            icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nextjs/nextjs-original.svg',
+            description: 'Building production-ready React applications with Next.js for server-side rendering and static site generation.'
+        },
+        {
+            name: 'Redux',
+            icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/redux/redux-original.svg',
+            description: 'Managing complex application state with Redux. Proficient with Redux Toolkit and middleware.'
+        }
+    ];
+    
+    // Get the orbital circle element
+    const orbitalCircle = document.querySelector('.orbital-circle');
+    const centralSkillIcon = document.querySelector('.central-skill-icon img');
+    const centralSkillName = document.querySelector('.central-skill h3');
+    const centralSkillDescription = document.querySelector('.central-skill-description');
+    
+    // Place technology icons in a circle
+    const radius = window.innerWidth < 768 ? 150 : 250; // Responsive radius
+    const totalIcons = skills.length;
+    
+    skills.forEach((skill, index) => {
+        // Calculate position on the circle
+        const angle = (index / totalIcons) * 2 * Math.PI;
+        const x = radius * Math.cos(angle);
+        const y = radius * Math.sin(angle);
+        
+        // Create tech icon element
+        const techIcon = document.createElement('div');
+        techIcon.className = 'tech-icon';
+        techIcon.style.left = `calc(50% + ${x}px)`;
+        techIcon.style.top = `calc(50% + ${y}px)`;
+        techIcon.style.transform = 'translate(-50%, -50%)';
+        
+        // Create image element
+        const img = document.createElement('img');
+        img.src = skill.icon;
+        img.alt = skill.name;
+        techIcon.appendChild(img);
+        
+        // Add skill name label
+        const nameLabel = document.createElement('span');
+        nameLabel.className = 'tech-name';
+        nameLabel.textContent = skill.name;
+        techIcon.appendChild(nameLabel);
+        
+        // Add hover effect
+        techIcon.addEventListener('mouseenter', function() {
+            centralSkillIcon.src = skill.icon;
+            centralSkillName.textContent = skill.name;
+            centralSkillDescription.textContent = skill.description;
+            document.querySelector('.central-skill').style.boxShadow = '0 0 80px rgba(70, 0, 123, 0.8)';
+        });
+        
+        // Add click event
+        techIcon.addEventListener('click', function(e) {
+            e.stopPropagation();
+            centralSkillIcon.src = skill.icon;
+            centralSkillName.textContent = skill.name;
+            centralSkillDescription.textContent = skill.description;
+            console.log(`Clicked on ${skill.name}`);
+        });
+        
+        // Add to orbital circle
+        orbitalCircle.appendChild(techIcon);
+    });
+    
+    // Slow rotation animation for the orbital circle
+    let angle = 0;
+    const rotateSpeed = 0.0002; // Very slow rotation speed
+    
+    function rotateIcons() {
+        angle += rotateSpeed;
+        const icons = document.querySelectorAll('.tech-icon');
+        const currentRadius = window.innerWidth < 768 ? 150 : 250; // Responsive radius
+        
+        icons.forEach((icon, index) => {
+            const iconAngle = angle + (index / totalIcons) * 2 * Math.PI;
+            const x = currentRadius * Math.cos(iconAngle);
+            const y = currentRadius * Math.sin(iconAngle);
+            
+            icon.style.left = `calc(50% + ${x}px)`;
+            icon.style.top = `calc(50% + ${y}px)`;
+        });
+        
+        requestAnimationFrame(rotateIcons);
+    }
+    
+    // Start rotation animation
+    rotateIcons();
+    
+    // Adjust orbital circle size on window resize
+    window.addEventListener('resize', function() {
+        const orbitalCircle = document.querySelector('.orbital-circle');
+        if (window.innerWidth < 768) {
+            orbitalCircle.style.width = '300px';
+            orbitalCircle.style.height = '300px';
+        } else {
+            orbitalCircle.style.width = '500px';
+            orbitalCircle.style.height = '500px';
+        }
+    });
+    
+    // Cursor trail effect
+    document.addEventListener("mousemove", function (e) {
+        const trail = document.createElement("div");
+        trail.className = "trail";
+        trail.style.pointerEvents = "none";
+
+        const colors = ['#ffffff66', '#00ffff88', '#ff00ff66'];
+        const size = Math.random() * 6 + 4;
+        trail.style.background = colors[Math.floor(Math.random() * colors.length)];
+        trail.style.width = trail.style.height = `${size}px`;
+
+        trail.style.left = `${e.pageX - size / 2}px`;
+        trail.style.top = `${e.pageY - size / 2}px`;
+
+        document.body.appendChild(trail);
+
+        setTimeout(() => {
+            trail.remove();
+        }, 1000);
+    });
+    
+    // Add click events to navigation links for testing
+    document.querySelectorAll('nav a').forEach(link => {
+        link.addEventListener('click', function(e) {
+            e.preventDefault();
+            console.log('Nav link clicked:', this.textContent);
+            const targetId = this.getAttribute('href');
+            const targetElement = document.querySelector(targetId);
+            if (targetElement) {
+                targetElement.scrollIntoView({ behavior: 'smooth' });
+            }
+        });
+    });
+    
+    // Add click events to buttons for testing
+    document.querySelectorAll('.btn-get-started').forEach(button => {
+        button.addEventListener('click', function(e) {
+            e.preventDefault();
+            console.log('Button clicked:', this.textContent);
+        });
+    });
+    
+    // Function to check if an element is in viewport
+    function isInViewport(element) {
+        const rect = element.getBoundingClientRect();
+        return (
+            rect.top >= 0 &&
+            rect.left >= 0 &&
+            rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
+            rect.right <= (window.innerWidth || document.documentElement.clientWidth)
+        );
+    }
+    
+    // Highlight active section in navigation
+    function highlightNavigation() {
+        const sections = document.querySelectorAll('section[id]');
+        const navLinks = document.querySelectorAll('nav a');
+        
+        sections.forEach(section => {
+            const sectionTop = section.offsetTop - 100;
+            const sectionHeight = section.clientHeight;
+            const sectionId = section.getAttribute('id');
+            
+            if (window.scrollY >= sectionTop && window.scrollY < sectionTop + sectionHeight) {
+                navLinks.forEach(link => {
+                    link.classList.remove('active');
+                    if (link.getAttribute('href') === `#${sectionId}`) {
+                        link.classList.add('active');
+                    }
+                });
+            }
+        });
+    }
+    
+    // Add scroll event for navigation highlighting
+    window.addEventListener('scroll', highlightNavigation);
+    
+    // Initial call to highlightNavigation
+    highlightNavigation();
+});
+</script>
+</body>
+</html> 
