@@ -1,31 +1,221 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=0.9">
-    <title>Gnaneswar - Portfolio</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio - Gnaneswar</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
     <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
-    
+  
     <style>
-        /* Base styles */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            /* Restore original font */
-            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
         }
-        
+
         body {
-            background: #000;
-            color: #fff;
-            overflow-x: hidden;
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            background-color: black;
+            color: #e7e7e7;
+            min-height: 100vh;
+            line-height: 1.5;
+        }
+
+        /* GRADIENT AND LAYER BLUR EFFECT */
+        .image-gradient {
+            position: absolute;
+            top: 0;
+            right: 0;
+            opacity: 0.5;
+            z-index: -1;
+        }
+
+        .layer-blur {
+            height: 0;
+            width: 30rem;
+            position: absolute;
+            top: 20%;
+            right: 0;
+            box-shadow: 0 0 700px 15px white;
+            rotate: -30deg;
+            z-index: -1;
+        }
+
+        /* CONTAINER */
+        .container {
+            width: 100%;
+            margin: 0 auto;
+            padding: 0 2rem;
             position: relative;
+            overflow: hidden;
+        }
+
+        /* HEADER */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 5rem;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            background-color: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(10px);
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 3rem;
+            font-weight: 300;
+        }
+
+        /* Profile Icon */
+        .profile-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            overflow: hidden;
+            cursor: pointer;
+            border: 2px solid rgba(127, 66, 167, 0.5);
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #7f42a7, #6600c5);
+        }
+
+        .profile-icon:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 15px rgba(127, 66, 167, 0.7);
+        }
+
+        .profile-icon img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* MAIN CONTENT */
+        main {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            min-height: calc(100vh - 6rem);
+            padding-top: 80px;
+        }
+
+        .content {
+            max-width: 40rem;
+            margin-left: 10%;
+            z-index: 999;
+        }
+
+        .tag-box {
+            position: relative;
+            width: 18rem;
+            height: 2.5rem;
+            border-radius: 50px;
+            background: linear-gradient(to right, #656565, #7f42a7, #6600c5, #5300a0, #757575, #656565);
+            background-size: 200%;
+            animation: animationGradient 2.5s linear infinite;
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
+        }
+
+        @keyframes animationGradient {
+            to {
+                background-position: 200%;
+            }
+        }
+
+        .tag-box .tag {
+            position: absolute;
+            inset: 3px;
+            background-color: black;
+            border-radius: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: 0.5s ease;
+            cursor: pointer;
+        }
+
+        .tag-box .tag:hover {
+            color: #5300a0;
+        }
+
+        .content h1 {
+            font-size: 2.5rem;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            margin: 2rem 0;
+            line-height: 1.2;
+            text-shadow: 0 0 10px rgba(128, 128, 128, 0.418);
+        }
+
+        .description {
+            font-size: 1rem;
+            letter-spacing: 0.05em;
+            max-width: 35rem;
+            color: gray;
+        }
+
+        .buttons {
+            display: flex;
+            gap: 1rem;
+            margin-top: 3rem;
+        }
+
+        .btn-get-started {
+            text-decoration: none;
+            border: 1px solid #2a2a2a;
+            padding: 0.7rem 1.2rem;
+            border-radius: 50px;
+            font-size: 1.2rem;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            transition: background-color 0.2s ease;
+            color: #e7e7e7;
+        }
+
+        .btn-get-started:hover {
+            background-color: #1a1a1a;
+        }
+
+        .btn-signing-main {
+            text-decoration: none;
+            background-color: lightgray;
+            color: black;
+            padding: 0.6rem 2.5rem;
+            border-radius: 50px;
+            font-size: 1.2rem;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            transition: background-color 0.2s ease;
+        }
+
+        .btn-signing-main:hover {
+            background-color: gray;
+        }
+
+        .robot-3d {
+            position: absolute;
+            top: 0;
+            right: -20%;
+            display: none; /* Hide all by default */
         }
         
-        /* Loading screen */
+        #aimodel {
+            left: 50%;
+        }
+
+        .robot-3d.active {
+            display: block; /* Show only active model */
+        }
+
+        /* LOADING ANIMATION */
         .loader {
             position: fixed;
             top: 0;
@@ -39,194 +229,62 @@
             align-items: center;
             z-index: 9999;
         }
-        
+
         .loader-text {
             font-size: 1.5rem;
             margin-bottom: 20px;
+            color: #fff;
+            letter-spacing: 2px;
+            animation: pulse 1.5s infinite alternate;
         }
-        
+
+        @keyframes pulse {
+            from { opacity: 0.5; }
+            to { opacity: 1; }
+        }
+
         .loader-bar {
             width: 200px;
             height: 4px;
             background: rgba(255, 255, 255, 0.1);
             border-radius: 2px;
             overflow: hidden;
+            position: relative;
         }
-        
+
         .loader-progress {
             height: 100%;
             width: 0;
-            background: linear-gradient(to right, #00ffff, #ff00ff);
-            animation: loading 2s ease-in-out forwards;
+            background: linear-gradient(to right, #656565, #7f42a7, #6600c5, #5300a0);
+            animation: loading 8s ease-in-out forwards;
         }
-        
+
         @keyframes loading {
             0% { width: 0; }
             100% { width: 100%; }
         }
-        
-        /* Gradient and blur */
-        .image-gradient {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            opacity: 0.7;
-            pointer-events: none;
-            z-index: -1;
-        }
-        
-        .layer-blur {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            backdrop-filter: blur(80px);
-            pointer-events: none;
-            z-index: -1;
-        }
-        
-        /* Container */
-        .container {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 40px 20px;
-            position: relative;
-            z-index: 10;
-        }
-        
-        /* Header */
-        header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 60px;
-            position: relative;
-            z-index: 1000;
-        }
-        
-        .logo {
-            font-size: 1.8rem;
-            font-weight: 700;
-        }
-        
-        nav {
-            display: flex;
-            gap: 30px;
-            position: relative;
-            z-index: 1000;
-        }
-        
-        nav a {
-            text-decoration: none;
-            color: #fff;
-            font-size: 1rem;
-            position: relative;
-            z-index: 1000;
-            cursor: pointer !important;
-            pointer-events: auto !important;
-        }
-        
-        nav a:hover {
-            color: #00ffff;
-        }
-        
-        /* Main content */
-        main {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            gap: 40px;
-            height: 70vh;
-            position: relative;
-        }
-        
-        .content {
-            max-width: 600px;
-            z-index: 5;
-        }
-        
-        .tag-box {
-            margin-bottom: 20px;
-        }
-        
-        .tag {
-            display: inline-block;
-            padding: 8px 16px;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 30px;
-            font-size: 0.8rem;
-            font-weight: 500;
-            margin-bottom: 20px;
-        }
-        
-        .description {
-            color: rgba(255, 255, 255, 0.7);
-            line-height: 1.6;
-            margin-bottom: 30px;
-            max-width: 500px;
-        }
-        
-        .buttons {
-            display: flex;
-            gap: 20px;
-        }
-        
-        .btn-get-started {
-            display: inline-block;
-            padding: 12px 24px;
-            background: rgba(255, 255, 255, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            border-radius: 30px;
-            color: #fff;
-            text-decoration: none;
-            font-weight: 500;
-            transition: all 0.3s ease;
-            position: relative;
-            z-index: 1000;
-            cursor: pointer !important;
-            pointer-events: auto !important;
-        }
-        
-        .btn-get-started:hover {
-            background: rgba(255, 255, 255, 0.2);
-            transform: translateY(-3px);
-        }
-        
-        /* 3D Model */
-        .robot-3d{
+
+        /* CURSOR ANIMATION */
+     
+        /* CURSOR ANIMATION - Enhanced */
+.trail {
     position: absolute;
-    top: 0;
-    right: -25%;
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 9999;
+    animation: fadeTrail 1.2s ease-out forwards;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
 }
 
-        /* Remove Spline watermark */
-        .robot-3d::part(watermark) {
-            display: none !important;
-            opacity: 0 !important;
-            visibility: hidden !important;
-        }
-        
-        /* Cursor trail */
-        .trail {
-            position: absolute;
-            border-radius: 50%;
-            pointer-events: none;
-            z-index: 9999;
-            animation: fade 1s ease-out forwards;
-        }
-        
-        @keyframes fade {
-            0% { transform: scale(1); opacity: 1; }
-            100% { transform: scale(0); opacity: 0; }
-        }
-        
+@keyframes fadeTrail {
+    0% { transform: scale(1); opacity: 1; }
+    50% { opacity: 0.7; }
+    100% { transform: scale(0.3); opacity: 0; }
+}
+
+
         /* Skills Section Styling */
         .skills-section {
-            /* Updated background to use #46007B with black gradient */
             background: linear-gradient(90deg, #000000 0%, #000000 50%, #3b1a54 100%);
             color: #ffffff;
             min-height: 80vh;
@@ -367,78 +425,755 @@
         .tech-icon:hover .tech-name {
             opacity: 1;
         }
-        
-        /* Responsive adjustments */
-        @media (max-width: 1200px) {
-            main {
-                flex-direction: column-reverse; /* Model on top, content below */
-                height: auto;
-                padding-bottom: 40px;
-            }
-            
-            .content {
-                max-width: 100%;
-                margin-top: 20px;
-                z-index: 5;
-            }
-            
-            .robot-3d {
-                position: relative;
-                width: 100%;
-                height: 350px;
-                right: auto;
-                top: auto;
-                transform: none;
-                margin-top: 20px;
-            }
+
+        /* Side Navigation */
+        .side-nav {
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: 320px;
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1500;
+            transition: right 0.4s cubic-bezier(0.77, 0.2, 0.05, 1.0);
+            display: flex;
+            flex-direction: column;
+            padding: 80px 20px 20px;
+            box-shadow: -5px 0 15px rgba(0, 0, 0, 0.5);
         }
-        
-        @media (max-width: 768px) {
+
+        .side-nav.active {
+            right: 0;
+        }
+
+        .side-nav-header {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .side-nav-logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            background: linear-gradient(to right, #7f42a7, #6600c5);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .side-nav-close {
+            font-size: 1.5rem;
+            color: #fff;
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+
+        .side-nav-links {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            overflow-y: auto;
+        }
+
+        .side-nav a {
+            padding: 15px 0;
+            font-size: 1rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            text-decoration: none;
+            color: #fff;
+            transition: color 0.3s ease;
+            display: block;
+        }
+
+        .side-nav a:hover {
+            color: #7f42a7;
+        }
+
+        .side-dropdown {
+            overflow: hidden;
+        }
+
+        .side-dropdown-content {
+            background: rgba(127, 66, 167, 0.1);
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+
+        .side-dropdown-content a {
+            padding-left: 30px;
+            font-size: 0.9rem;
+        }
+
+        .side-dropdown.active .side-dropdown-content {
+            max-height: 500px;
+        }
+
+        .side-dropdown-toggle {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .side-dropdown-toggle .arrow {
+            transition: transform 0.3s ease;
+        }
+
+        .side-dropdown.active .side-dropdown-toggle .arrow {
+            transform: rotate(180deg);
+        }
+
+        .contact-button {
+            display: block;
+            background: linear-gradient(to right, #7f42a7, #6600c5);
+            color: white;
+            text-align: center;
+            padding: 10px;
+            border-radius: 30px;
+            margin: 10px 0;
+            font-weight: 300;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .contact-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(126, 66, 167, 0.3);
+        }
+
+        .social-icons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 20px;
+            padding-bottom: 30px;
+        }
+
+        .social-icons a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border: none !important;
+            padding: 0 !important;
+        }
+
+        .social-icons a:hover {
+            background: rgba(127, 66, 167, 0.5);
+            transform: translateY(-3px);
+        }
+
+        .social-icons i {
+            font-size: 18px;
+        }
+
+        /* Overlay for side nav */
+        .nav-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1400;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .nav-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        /* Domain Switcher Button */
+        .domain-switcher {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #7f42a7, #6600c5);
+            color: white;
+            border: none;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            cursor: pointer;
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            font-size: 1.5rem;
+        }
+
+        .domain-switcher:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 20px rgba(126, 66, 167, 0.5);
+        }
+
+        .domain-switcher i {
+            transition: transform 0.4s ease;
+        }
+
+        .domain-switcher:hover i {
+            transform: rotate(180deg);
+        }
+
+        /* Domain Indicator */
+        .domain-indicator {
+            position: fixed;
+            bottom: 100px;
+            right: 30px;
+            background: rgba(0, 0, 0, 0.7);
+            padding: 10px 20px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            color: white;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(20px);
+            transition: all 0.3s ease;
+            pointer-events: none;
+            z-index: 999;
+        }
+
+        .domain-indicator.show {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .domain-name {
+            font-weight: 600;
+            background: linear-gradient(to right, #7f42a7, #6600c5);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* Content domains */
+        .content-container {
+            display: none;
+        }
+
+        .content-container.active {
+            display: block;
+        }
+
+        /* Skills domains */
+        .skills-web-domain, .skills-aiml-domain {
+            display: none;
+        }
+
+        .skills-web-domain.active, .skills-aiml-domain.active {
+            display: block;
+        }
+
+        /* Projects Section */
+        .projects-section {
+            background: linear-gradient(90deg, #000000 0%, #000000 50%, #1a1a1a 100%);
+            padding: 80px 0;
+            position: relative;
+        }
+
+        .section-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .section-title {
+            font-size: 3rem;
+            text-align: center;
+            margin-bottom: 40px;
+            color: #f5f5f5;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background: linear-gradient(90deg, #7f42a7, #6600c5);
+        }
+
+        /* Projects Container */
+        .projects-container {
+            display: none;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.5s ease, transform 0.5s ease;
+        }
+
+        .projects-container.active {
+            display: block;
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Project Filters */
+        .project-filters {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 40px;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            background: transparent;
+            color: #f5f5f5;
+            border: 1px solid #7f42a7;
+            border-radius: 30px;
+            padding: 8px 20px;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .filter-btn:hover, .filter-btn.active {
+            background: linear-gradient(90deg, #7f42a7, #6600c5);
+            color: white;
+        }
+
+        /* Projects Grid */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 30px;
+        }
+
+        /* Project Card */
+        .project-card {
+            background: rgba(25, 25, 25, 0.8);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            height: 380px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
+        }
+
+        .project-image-container {
+            position: relative;
+            height: 180px;
+            overflow: hidden;
+        }
+
+        .project-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .project-card:hover .project-image {
+            transform: scale(1.05);
+        }
+
+        .project-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .project-card:hover .project-overlay {
+            opacity: 1;
+        }
+
+        .view-project {
+            width: 50px;
+            height: 50px;
+            background: #7f42a7;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            transform: scale(0);
+            transition: transform 0.3s ease;
+        }
+
+        .project-card:hover .view-project {
+            transform: scale(1);
+        }
+
+        .view-project i {
+            font-size: 1.2rem;
+        }
+
+        .project-content {
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+        }
+
+        .project-title {
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+            color: #f5f5f5;
+        }
+
+        .project-description {
+            color: #ccc;
+            margin-bottom: 15px;
+            font-size: 0.9rem;
+            line-height: 1.5;
+            flex-grow: 1;
+        }
+
+        .project-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: auto;
+        }
+
+        .project-tag {
+            background: rgba(127, 66, 167, 0.2);
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            color: #ddd;
+            border: 1px solid rgba(127, 66, 167, 0.5);
+        }
+
+        /* Footer Styles */
+        .footer {
+            background-color: #1a1a1a;
+            color: #ffffff;
+            padding: 60px 0 30px;
+            position: relative;
+            will-change: transform;
+        }
+
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .footer-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            flex-wrap: wrap;
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .footer-left {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .footer-heading {
+            font-size: 3rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+            background: linear-gradient(90deg, #ffffff, #a7a7a7);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .footer-subheading {
+            font-size: 1.1rem;
+            color: #a7a7a7;
+            margin-bottom: 15px;
+        }
+
+        .footer-email {
+            display: inline-block;
+            font-size: 1.2rem;
+            color: #ffffff;
+            text-decoration: none;
+            position: relative;
+            font-weight: 500;
+        }
+
+        .footer-email:hover {
+            color: #7f42a7;
+        }
+
+        .footer-right {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            align-items: flex-end;
+        }
+
+        .footer-cta {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 12px 25px;
+            background-color: transparent;
+            color: #ffffff;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 50px;
+            font-size: 1.1rem;
+            text-decoration: none;
+        }
+
+        .cta-arrow {
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #7f42a7, #6600c5);
+            border-radius: 50%;
+        }
+
+        .footer-contact {
+            text-align: right;
+        }
+
+        .footer-phone {
+            display: block;
+            font-size: 1.2rem;
+            color: #ffffff;
+            text-decoration: none;
+            margin-bottom: 5px;
+            font-weight: 500;
+        }
+
+        .footer-timezone {
+            color: #a7a7a7;
+            font-size: 0.9rem;
+        }
+
+        .footer-divider {
+            height: 1px;
+            background: rgba(255, 255, 255, 0.1);
+            margin-bottom: 30px;
+        }
+
+        .footer-bottom {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+
+        .footer-social {
+            display: flex;
+            gap: 15px;
+        }
+
+        .social-icon {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            color: #ffffff;
+            text-decoration: none;
+        }
+
+        .back-to-top-btn {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #7f42a7, #6600c5);
+            border-radius: 50%;
+            color: #ffffff;
+            text-decoration: none;
+        }
+
+        .footer-copyright {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            color: #a7a7a7;
+            font-size: 0.9rem;
+        }
+
+        .footer-links {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .footer-links a {
+            color: #a7a7a7;
+            text-decoration: none;
+        }
+
+        .footer-separator {
+            color: rgba(167, 167, 167, 0.5);
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 1300px) {
             header {
-                flex-direction: column;
-                gap: 20px;
+                padding: 1rem 2rem;
             }
-            
-            nav {
-                flex-wrap: wrap;
-                justify-content: center;
-                gap: 15px;
-            }
-            
-            main {
-                height: auto;
-                padding: 0;
-                flex-direction: column-reverse; /* Model on top, content below */
-            }
-            
+
             .content {
-                padding: 0 10px;
-                margin-top: 30px;
-                margin-bottom: 50px;
+                margin-top: 50px;
             }
-            
-                   .robot-3d {
-                height: 800px;
+
+          
+        }
+
+        @media (max-width: 768px){
+    #aimodel{
+        top: -110px;
+        left: -40px;
+}
+}
+    
+     @media (max-width: 480px) {
+            .robot-3d {
+                height: 600px;
                
             }
             .robot-3d{
     position: absolute;
-    top: -230px;
+    top: -90px;
+    z-index: -999;
+   
   
 }
 .content-container{
-    margin-top: 80%;
-    z-index:999 ;
+    margin-top: 340px;
+    z-index:1 ;
+    
+    background-size: contain;
     background-color: #000;
+    width: 25rem;
+    backdrop-filter: blur;
+    background-position-x: left 100%;
+ 
+   
 }
+  .content{
+       
+        top: -60%;
+        left: -30px;
+      }    
+
+     }
+        @media (max-width: 768px) {
+            header {
+                padding: 0.8rem 1.5rem;
+            }
+
+            header h1 {
+                font-size: 2rem;
+            }
+
+            .content {
+                margin-top: 120px;
+                margin-left: 5%;
+                width: 90%;
+            }
+                        .robot-3d {
+                height: 600px;
+               
+            }
+            .robot-3d{
+    position: absolute;
+    top: -90px;
+    z-index: -111;
+    right: 1%;
+  
+}
+.content-container{
+    height: 50vh;
+    left: -10px;
+    margin-top: 320px;
+    z-index:999 ;
+    background-image: url('C:/My_Projects/3D-portfolio/gradient.png');
+    background-position: center;
+    background-size:100%;
+    
+    width: 25rem;
+    backdrop-filter: blur;
+    background-position-x: left 100%;
+ 
+   
+}
+
+            .tag-box {
+                width: 12rem;
+                height: 2rem;
+            }
+            
+            .content h1 {
+                font-size: 2.2rem;
+                margin: 1.5rem 0;
+            }
+
+            .description {
+                font-size: 0.95rem;
+            }
+
+            .buttons {
+                flex-direction: column;
+                gap: 15px;
+                align-items: flex-start;
+                width: 100%;
+            }
+            
+            .btn-get-started, .btn-signing-main {
+                font-size: 1rem;
+                padding: 0.7rem 1.5rem;
+                width: 100%;
+                text-align: center;
+            }
+            
             .orbital-circle {
                 width: 300px;
                 height: 300px;
             }
             
             .central-skill {
-                width: 180px;
-                height: 180px;
+                width: 160px;
+                height: 160px;
             }
             
             .central-skill-icon {
@@ -463,241 +1198,207 @@
                 font-size: 2.5rem;
             }
             
-            .buttons {
+            .projects-grid {
+                grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            }
+            
+            .section-title {
+                font-size: 2.5rem;
+            }
+            
+            .footer {
+                padding: 40px 0 20px;
+            }
+            
+            .footer-top {
                 flex-direction: column;
-                gap: 15px;
+                gap: 30px;
+            }
+            
+            .footer-right {
+                width: 100%;
                 align-items: flex-start;
             }
             
-            .btn-get-started {
-                display: block;
+            .footer-contact {
+                text-align: left;
+            }
+            
+            .footer-bottom {
+                flex-direction: column;
+                gap: 20px;
+            }
+            
+            .footer-social {
                 width: 100%;
+                justify-content: center;
+            }
+            
+            .footer-back-to-top {
+                position: fixed;
+                bottom: 20px;
+                right: 20px;
+                z-index: 100;
+            }
+            
+            .footer-copyright {
+                flex-direction: column;
                 text-align: center;
             }
+
+            .side-nav {
+                width: 280px;
+            }
         }
-        
-        @media (max-width: 480px) {
-            .robot-3d {
-                height: 600px;
-               
-            }
-            .robot-3d{
-    position: absolute;
-    top: -180px;
   
-}
-.content-container{
-    margin-top: 80%;
-    z-index:999 ;
-    background-color: #000;
-}
-            
-            h1 {
-                font-size: 2rem !important;
+
+    
+        @media (max-width: 480px) {
+            header {
+                padding: 0.7rem 1rem;
+            }
+
+            header h1 {
+                font-size: 1.5rem;
+            }
+
+            .content {
+                margin-top: 20px;
+                margin-left: -5px;
+                width: 80%;
+            }
+
+           
+            .tag-box {
+                width: 10rem;
+                height: 1.8rem;
             }
             
+            .tag-box .tag {
+                font-size: 0.8rem;
+            }
+            
+            .content h1 {
+                font-size: 1.8rem;
+                margin: 1rem 0;
+            }
+
             .description {
-                font-size: 0.9rem !important;
+                font-size: 0.85rem;
+                max-width: 100%;
+            }
+
+            .btn-get-started, .btn-signing-main {
+                font-size: 0.8rem;
+                padding: 0.6rem 1.2rem;
             }
             
             .skills-title {
                 font-size: 2rem;
+                margin-bottom: 30px;
             }
             
-            nav {
-                gap: 10px;
+            .skills-wheel-container {
+                height: 400px;
             }
             
-            nav a {
+            .orbital-circle {
+                width: 240px;
+                height: 240px;
+            }
+            
+            .central-skill {
+                width: 140px;
+                height: 140px;
+                padding: 15px;
+            }
+            
+            .central-skill-icon {
+                width: 40px;
+                height: 40px;
+                margin-bottom: 10px;
+            }
+            
+            .central-skill h3 {
+                font-size: 1.2rem;
+                margin-bottom: 5px;
+            }
+            
+            .central-skill-description {
+                font-size: 0.65rem;
+                max-width: 120px;
+            }
+            
+            .tech-icon {
+                width: 40px;
+                height: 40px;
+            }
+            
+            .project-card {
+                height: auto;
+            }
+            
+            .project-image-container {
+                height: 140px;
+            }
+            
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .filter-btn {
+                padding: 6px 12px;
+                font-size: 0.75rem;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+            
+            .footer-heading {
+                font-size: 2rem;
+            }
+            
+            .footer-email, .footer-phone {
+                font-size: 1rem;
+            }
+            
+            .footer-cta {
+                width: 100%;
+                justify-content: center;
+                padding: 10px 15px;
                 font-size: 0.9rem;
+            }
+            
+            .domain-switcher {
+                width: 50px;
+                height: 50px;
+                bottom: 20px;
+                right: 20px;
+                font-size: 1.2rem;
+            }
+            
+            .domain-indicator {
+                bottom: 80px;
+                right: 20px;
+                font-size: 0.8rem;
+                padding: 8px 15px;
+            }
+
+            .side-nav {
+                width: 260px;
             }
         }
 
-        /* Hamburger Menu Styles */
-.hamburger-menu {
-    display: none;
-    flex-direction: column;
-    justify-content: space-between;
-    width: 30px;
-    height: 20px;
-    cursor: pointer;
-    z-index: 2000;
-    position: relative;
-}
-
-.hamburger-menu span {
-    display: block;
-    height: 3px;
-    width: 100%;
-    background-color: #fff;
-    border-radius: 3px;
-    transition: all 0.3s ease;
-}
-
-/* Mobile navigation */
-.mobile-nav {
-    position: fixed;
-    top: 0;
-    right: -100%;
-    width: 80%;
-    height: 100vh;
-    background: rgba(0, 0, 0, 0.95);
-    backdrop-filter: blur(10px);
-    z-index: 1500;
-    transition: right 0.4s cubic-bezier(0.77, 0.2, 0.05, 1.0);
-    display: flex;
-    flex-direction: column;
-    padding: 80px 20px 20px;
-    box-shadow: -5px 0 15px rgba(0, 0, 0, 0.5);
-}
-
-.mobile-nav.active {
-    right: 0;
-}
-
-.mobile-nav a {
-    padding: 15px 0;
-    font-size: 1.2rem;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-    text-decoration: none;
-    color: #fff;
-    transition: color 0.3s ease;
-    display: block;
-}
-
-.mobile-nav a:hover {
-    color: #00ffff;
-}
-
-/* Overlay for mobile menu */
-.menu-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.5);
-    z-index: 1400;
-    opacity: 0;
-    visibility: hidden;
-    transition: all 0.3s ease;
-}
-
-.menu-overlay.active {
-    opacity: 1;
-    visibility: visible;
-}
-
-/* Hamburger animation */
-.hamburger-menu.active span:nth-child(1) {
-    transform: translateY(8px) rotate(45deg);
-}
-
-.hamburger-menu.active span:nth-child(2) {
-    opacity: 0;
-}
-
-.hamburger-menu.active span:nth-child(3) {
-    transform: translateY(-8px) rotate(-45deg);
-}
-
-/* Dropdown Menu Styles */
-.dropdown {
-    position: relative;
-}
-
-.dropdown-content {
-    position: absolute;
-    top: 100%;
-    left: 0;
-    background: rgba(0, 0, 0, 0.9);
-    min-width: 200px;
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-    z-index: 1100;
-    border-radius: 8px;
-    opacity: 0;
-    visibility: hidden;
-    transform: translateY(10px);
-    transition: all 0.3s ease;
-}
-
-.dropdown:hover .dropdown-content {
-    opacity: 1;
-    visibility: visible;
-    transform: translateY(0);
-}
-
-.dropdown-content a {
-    color: white;
-    padding: 12px 16px;
-    text-decoration: none;
-    display: block;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-    transition: all 0.2s ease;
-}
-
-.dropdown-content a:hover {
-    background-color: rgba(255, 255, 255, 0.1);
-    color: #00ffff;
-}
-
-.dropdown-content a:last-child {
-    border-bottom: none;
-}
-
-/* Mobile dropdown */
-.mobile-dropdown {
-    overflow: hidden;
-}
-
-.mobile-dropdown-content {
-    background: rgba(0, 0, 0, 0.3);
-    max-height: 0;
-    overflow: hidden;
-    transition: max-height 0.3s ease;
-}
-
-.mobile-dropdown-content a {
-    padding-left: 30px;
-    font-size: 1rem;
-}
-
-.mobile-dropdown.active .mobile-dropdown-content {
-    max-height: 500px;
-}
-
-.mobile-dropdown-toggle {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.mobile-dropdown-toggle .arrow {
-    transition: transform 0.3s ease;
-}
-
-.mobile-dropdown.active .mobile-dropdown-toggle .arrow {
-    transform: rotate(180deg);
-}
-
-/* Responsive adjustments for navigation */
-@media (max-width: 768px) {
-    nav {
-        display: none; /* Hide desktop nav on mobile */
-    }
-    
-    .hamburger-menu {
-        display: flex; /* Show hamburger on mobile */
-    }
-    
-    header {
-        flex-direction: row !important;
-        justify-content: space-between;
-        padding: 0 10px;
-    }
-}
+        /* Remove Spline watermark */
+        spline-viewer::part(watermark) {
+            display: none !important;
+            opacity: 0 !important;
+            visibility: hidden !important;
+        }
     </style>
 </head>
+
 <body>
     <!-- Loading Screen -->
     <div class="loader">
@@ -710,165 +1411,159 @@
     <img class="image-gradient" src="gradient.png" alt="gradient">
     <div class="layer-blur"></div>
 
+    <!-- Domain Switcher Button -->
+    <button class="domain-switcher" id="domainSwitch">
+        <i class="fas fa-sync"></i>
+    </button>
+    
+    <!-- Domain Indicator -->
+    <div class="domain-indicator" id="domainIndicator">
+        Current domain: <span class="domain-name" id="domainName">Web Development</span>
+    </div>
+
     <div class="container">
         <header>
             <h1 data-aos="fade-down" data-aos-duration="1500" class="logo">Gnaneswar</h1>
 
-           <!-- Add this right after your <header> opening tag, before the logo -->
-<div class="hamburger-menu">
-    <span></span>
-    <span></span>
-    <span></span>
-</div>
-
-<!-- Add this right after the closing </header> tag -->
-<div class="mobile-nav">
-    <a href="#skills">Skills</a>
-    <a href="#education">Education</a>
-    <a href="#projects">Projects</a>
-    <div class="mobile-dropdown">
-        <a href="#certifications" class="mobile-dropdown-toggle">
-            Certifications
-            <span class="arrow">▼</span>
-        </a>
-        <div class="mobile-dropdown-content">
-            <a href="#internships">Internships</a>
-            <a href="#courses">Online Courses</a>
-            <a href="#workshops">Workshops</a>
-        </div>
-    </div>
-    <a href="#awards">Honors & Awards</a>
-</div>
-
-<div class="menu-overlay"></div>
-
-<!-- Update your desktop navigation to include dropdown -->
-<nav>
-    <a data-aos="fade-down" data-aos-duration="1500" href="#skills">Skills</a>
-    <a data-aos="fade-down" data-aos-duration="2000" href="#education">Education</a>
-    <a data-aos="fade-down" data-aos-duration="2500" href="#projects">Projects</a>
-    <div class="dropdown">
-        <a data-aos="fade-down" data-aos-duration="3000" href="#certifications">Certifications</a>
-        <div class="dropdown-content">
-            <a href="#internships">Internships</a>
-            <a href="#courses">Online Courses</a>
-            <a href="#workshops">Workshops</a>
-        </div>
-    </div>
-    <a data-aos="fade-down" data-aos-duration="3000" href="#awards">Honors & Awards</a>
-</nav>
-
-<!-- Add this JavaScript at the end of your existing script, before the closing </script> tag -->
-<script>
-// Hamburger menu functionality
-const hamburger = document.querySelector('.hamburger-menu');
-const mobileNav = document.querySelector('.mobile-nav');
-const menuOverlay = document.querySelector('.menu-overlay');
-const mobileDropdowns = document.querySelectorAll('.mobile-dropdown');
-
-// Toggle mobile menu
-hamburger.addEventListener('click', function() {
-    this.classList.toggle('active');
-    mobileNav.classList.toggle('active');
-    menuOverlay.classList.toggle('active');
-    
-    // Prevent scrolling when menu is open
-    if (mobileNav.classList.contains('active')) {
-        document.body.style.overflow = 'hidden';
-    } else {
-        document.body.style.overflow = 'auto';
-    }
-});
-
-// Close menu when clicking outside
-menuOverlay.addEventListener('click', function() {
-    hamburger.classList.remove('active');
-    mobileNav.classList.remove('active');
-    menuOverlay.classList.remove('active');
-    document.body.style.overflow = 'auto';
-});
-
-// Mobile dropdown toggles
-mobileDropdowns.forEach(dropdown => {
-    const toggle = dropdown.querySelector('.mobile-dropdown-toggle');
-    
-    toggle.addEventListener('click', function(e) {
-        e.preventDefault();
-        dropdown.classList.toggle('active');
-    });
-});
-
-// Close mobile menu when clicking on a link
-document.querySelectorAll('.mobile-nav a:not(.mobile-dropdown-toggle)').forEach(link => {
-    link.addEventListener('click', function() {
-        hamburger.classList.remove('active');
-        mobileNav.classList.remove('active');
-        menuOverlay.classList.remove('active');
-        document.body.style.overflow = 'auto';
-    });
-});
-</script>
+            <!-- Profile Icon -->
+            <div class="profile-icon" id="profileIcon">
+                <img src="profile_icon.png" alt="Profile">
+            </div>
         </header>
 
-        <main>
-            <!-- 3D Model is now above content in the DOM for mobile view -->
-            <spline-viewer 
-                data-aos="fade-zoom-in"
-                data-aos-easing="ease-in-back"
-                data-aos-delay="300"
-                data-aos-offset="0" 
-                data-aos-duration="3000"  
-                class="robot-3d"   
-                url="https://prod.spline.design/Qr2knMM4aKElH8x7/scene.splinecode">
-            </spline-viewer>
-        <div class="content-container">
-            <div class="content" style="margin-top: 80px;">
-                <div data-aos="fade-zoom-in"
-                    data-aos-easing="ease-in-back"
-                    data-aos-delay="300"
-                    data-aos-offset="0" 
-                    data-aos-duration="1500" 
-                    class="tag-box">
-                    <div class="tag">INTRODUCING ∧</div>
+        <!-- Side Navigation -->
+        <div class="side-nav" id="sideNav">
+            <div class="side-nav-header">
+                <div class="side-nav-logo">Gnaneswar</div>
+                <button class="side-nav-close" id="sideNavClose">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+
+            <div class="side-nav-links">
+                <a href="#skills">Skills</a>
+                <a href="#education">Education</a>
+                <a href="#projects">Projects</a>
+                <div class="side-dropdown">
+                    <a href="#" class="side-dropdown-toggle">
+                        Experience
+                        <span class="arrow">▼</span>
+                    </a>
+                    <div class="side-dropdown-content">
+                        <a href="certifications.html">Certifications</a>
+                        <a href="internships.html">Internships</a>
+                        <a href="achievements.html">Achievements</a>
+                    </div>
                 </div>
+                
+            </div>
 
-                <h1 style="font-size: 2.4rem;" data-aos="fade-zoom-in"
-                    data-aos-easing="ease-in-back"
-                    data-aos-delay="300"
-                    data-aos-offset="0" 
-                    data-aos-duration="2000">
-                    FRONTEND WEB<br>DEVELOPER (REACT)
-                </h1>
+            <!-- Contact Button -->
+            <a href="#contact" class="contact-button">Contact Me</a>
 
-                <p style="font-size: 1rem;" data-aos="fade-zoom-in"
-                    data-aos-easing="ease-in-back"
-                    data-aos-delay="300"
-                    data-aos-offset="0" 
-                    data-aos-duration="2500"  
-                    class="description">
-                    Building modern, fast, and responsive web interfaces using React.js. Passionate about clean code and seamless user experiences.
-                </p>
-
-                <div data-aos="fade-zoom-in"
-                    data-aos-easing="ease-in-back"
-                    data-aos-delay="300"
-                    data-aos-offset="0" 
-                    data-aos-duration="3000"  
-                    class="buttons">
-                    <a href="#" class="btn-get-started">Resume</a>
-                    <a href="#" class="btn-get-started">Contact</a>
-                </div>
+            <!-- Social Media Icons -->
+            <div class="social-icons">
+                <a href="https://www.linkedin.com/in/gnaneswar-damarasingu/" target="_blank" aria-label="LinkedIn">
+                    <i class="fab fa-linkedin-in"></i>
+                </a>
+                <a href="https://github.com/Gnaneswar22" target="_blank" aria-label="GitHub">
+                    <i class="fab fa-github"></i>
+                </a>
+                <a href="mailto:gnaneswardamarasingu@gmail.com" aria-label="Email">
+                    <i class="far fa-envelope"></i>
+                </a>
             </div>
         </div>
+
+        <!-- Overlay for side nav -->
+        <div class="nav-overlay" id="navOverlay"></div>
+
+        <main>
+            <!-- Web Development Domain Content -->
+            <div class="content-container web-dev-domain active">
+                <div class="content" >
+                    <div data-aos="fade-zoom-in"
+                    data-aos-easing="ease-in-back"
+                    data-aos-delay="300"
+                    data-aos-offset="0" data-aos-duration="1500" class="tag-box">
+                        <div class="tag">INTRODUCING &wedbar;</div>
+                    </div>
+
+                    <h1 data-aos="fade-zoom-in"
+                    data-aos-easing="ease-in-back"
+                    data-aos-delay="300"
+                    data-aos-offset="0" data-aos-duration="2000" > FRONTEND<br>DEVELOPER</h1>
+
+                    <p data-aos="fade-zoom-in"
+                    data-aos-easing="ease-in-back"
+                    data-aos-delay="300"
+                    data-aos-offset="0" data-aos-duration="2500"  class="description">
+                        Building modern, fast, and responsive web interfaces using React.js. Passionate about clean code and seamless user experiences.
+                    </p>
+
+                    <div data-aos="fade-zoom-in"
+                    data-aos-easing="ease-in-back"
+                    data-aos-delay="300"
+                    data-aos-offset="0" data-aos-duration="3000"  class="buttons">
+                        <a href="#" class="btn-get-started">Resume &gt;</a>
+                        <a href="#skills" class="btn-signing-main">Know More &gt;</a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- AIML Domain Content -->
+            <div class="content-container aiml-domain">
+                <div class="content">
+                    <div data-aos="fade-zoom-in"
+                    data-aos-easing="ease-in-back"
+                    data-aos-delay="300"
+                    data-aos-offset="0" data-aos-duration="1500" class="tag-box">
+                        <div class="tag">INTRODUCING &wedbar;</div>
+                    </div>
+
+                    <h1 data-aos="fade-zoom-in"
+                    data-aos-easing="ease-in-back"
+                    data-aos-delay="300"
+                    data-aos-offset="0" data-aos-duration="2000">AI/ML<br>ENGINEER</h1>
+
+                    <p data-aos="fade-zoom-in"
+                    data-aos-easing="ease-in-back"
+                    data-aos-delay="300"
+                    data-aos-offset="0" data-aos-duration="2500" class="description">
+                        Developing intelligent systems and machine learning models. Specializing in data analysis, neural networks, and AI applications.
+                    </p>
+
+                    <div data-aos="fade-zoom-in"
+                    data-aos-easing="ease-in-back"
+                    data-aos-delay="300"
+                    data-aos-offset="0" data-aos-duration="3000" class="buttons">
+                        <a href="#" class="btn-get-started">Resume &gt;</a>
+                        <a href="#skills" class="btn-signing-main">Know More &gt;</a>
+                    </div>
+                </div>
+            </div>
         </main>
+
+        <!-- Web Development 3D Model -->
+        <spline-viewer data-aos="fade-zoom-in"
+        data-aos-easing="ease-in-back"
+        data-aos-delay="300"
+        data-aos-offset="0" data-aos-duration="3000" class="robot-3d web-dev-model active" url="https://prod.spline.design/Qr2knMM4aKElH8x7/scene.splinecode"></spline-viewer>
+        
+        <!-- AI/ML 3D Model -->
+        <spline-viewer data-aos="fade-zoom-in"
+        data-aos-easing="ease-in-back"
+        data-aos-delay="300"
+        data-aos-offset="0" data-aos-duration="3000"  id="aimodel" class="robot-3d aiml-model" url="https://prod.spline.design/5NuYZQ63P6LwfZEr/scene.splinecode"></spline-viewer>
     </div>
 
-    <!-- Skills Section -->
+    <!-- Skills Section with Domain-Specific Content -->
     <section id="skills" class="skills-section">
         <div class="skills-content">
             <h1 class="skills-title">My Skills</h1>
             
-            <div class="skills-wheel-container">
+            <!-- Web Development Skills - Shown by default -->
+            <div class="skills-wheel-container skills-web-domain active">
                 <!-- Central Skill -->
                 <div class="central-skill">
                     <div class="central-skill-icon">
@@ -881,326 +1576,830 @@ document.querySelectorAll('.mobile-nav a:not(.mobile-dropdown-toggle)').forEach(
                 </div>
                 
                 <!-- Orbital Circle -->
-                <div class="orbital-circle">
+                <div class="orbital-circle" id="webDevOrbitalCircle">
+                    <!-- Technology Icons will be dynamically placed here by JavaScript -->
+                </div>
+            </div>
+
+            <!-- AIML Skills - Hidden by default -->
+            <div class="skills-wheel-container skills-aiml-domain">
+                <!-- Central Skill -->
+                <div class="central-skill">
+                    <div class="central-skill-icon">
+                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" alt="Python">
+                    </div>
+                    <h3>Python</h3>
+                    <p class="central-skill-description">
+                        Creating AI/ML solutions with Python. Experienced in data analysis, model training, and deploying machine learning applications.
+                    </p>
+                </div>
+                
+                <!-- Orbital Circle -->
+                <div class="orbital-circle" id="aimlOrbitalCircle">
                     <!-- Technology Icons will be dynamically placed here by JavaScript -->
                 </div>
             </div>
         </div>
     </section>
 
-    <script type="module" src="https://unpkg.com/@splinetool/viewer@1.9.98/build/spline-viewer.js"></script>
-    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
-    
-    <script>
-     // Initialize AOS
-document.addEventListener('DOMContentLoaded', function() {
-    // Hide loader after page loads
-    setTimeout(() => {
-        document.querySelector('.loader').style.display = 'none';
-    }, 2000);
-    
-    // Initialize AOS
-    AOS.init();
-    
-    // Multiple approaches to remove Spline watermark
-    function removeWatermark() {
-        // Approach 1: Use CSS custom properties
-        const splineViewer = document.querySelector('spline-viewer');
-        if (splineViewer) {
-            splineViewer.style.setProperty('--watermark-display', 'none');
-        }
-        
-        // Approach 2: Try to access shadow DOM
-        if (splineViewer && splineViewer.shadowRoot) {
-            // Try to add style to shadow DOM
-            const style = document.createElement('style');
-            style.textContent = '.watermark, [class*="watermark"] { display: none !important; opacity: 0 !important; visibility: hidden !important; }';
-            splineViewer.shadowRoot.appendChild(style);
+    <!-- Projects Section -->
+    <section id="projects" class="projects-section">
+        <div class="section-container">
+            <h2 class="section-title">My Works</h2>
             
-            // Try to find and remove watermark directly
-            const watermarks = splineViewer.shadowRoot.querySelectorAll('.watermark, [class*="watermark"]');
-            watermarks.forEach(watermark => {
-                watermark.style.display = 'none';
-                watermark.remove();
+            <!-- Web Development Projects (shown by default) -->
+            <div class="projects-container web-dev-projects active">
+                <!-- Project Filters for Web Dev -->
+                <div class="project-filters">
+                    <button class="filter-btn active" data-filter="all">All</button>
+                    <button class="filter-btn" data-filter="react">React</button>
+                    <button class="filter-btn" data-filter="fullstack">Full Stack</button>
+                    <button class="filter-btn" data-filter="ui">UI/UX</button>
+                </div>
+                
+                <div class="projects-grid">
+                    <div class="project-card" data-category="react ui">
+                        <div class="project-image-container">
+                            <img src="https://via.placeholder.com/600x300/2A2F4F/FFFFFF?text=E-Commerce+Platform" alt="E-Commerce Platform" class="project-image">
+                            <div class="project-overlay">
+                                <a href="#" class="view-project">
+                                    <i class="fas fa-arrow-right"></i>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="project-content">
+                            <h3 class="project-title">E-Commerce Platform</h3>
+                            <p class="project-description">Full-stack e-commerce solution with product catalog, shopping cart, and payment integration.</p>
+                            <div class="project-tags">
+                                <span class="project-tag">React</span>
+                                <span class="project-tag">Node.js</span>
+                                <span class="project-tag">MongoDB</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="project-card" data-category="react ui">
+                        <div class="project-image-container">
+                            <img src="https://via.placeholder.com/600x300/917FB3/FFFFFF?text=Admin+Dashboard" alt="Admin Dashboard" class="project-image">
+                            <div class="project-overlay">
+                                <a href="#" class="view-project">
+                                    <i class="fas fa-arrow-right"></i>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="project-content">
+                            <h3 class="project-title">Admin Dashboard</h3>
+                            <p class="project-description">Responsive admin panel with data visualization, user management, and dark mode support.</p>
+                            <div class="project-tags">
+                                <span class="project-tag">React</span>
+                                <span class="project-tag">Material UI</span>
+                                <span class="project-tag">Chart.js</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="project-card" data-category="fullstack">
+                        <div class="project-image-container">
+                            <img src="https://via.placeholder.com/600x300/E5BEEC/333333?text=Portfolio+Website" alt="Portfolio Website" class="project-image">
+                            <div class="project-overlay">
+                                <a href="#" class="view-project">
+                                    <i class="fas fa-arrow-right"></i>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="project-content">
+                            <h3 class="project-title">Portfolio Website</h3>
+                            <p class="project-description">Responsive portfolio website with smooth animations and domain switching functionality.</p>
+                            <div class="project-tags">
+                                <span class="project-tag">HTML/CSS</span>
+                                <span class="project-tag">JavaScript</span>
+                                <span class="project-tag">Spline 3D</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- AI/ML Projects (hidden by default) -->
+            <div class="projects-container aiml-projects">
+                <!-- Project Filters for AI/ML -->
+                <div class="project-filters">
+                    <button class="filter-btn active" data-filter="all">All</button>
+                    <button class="filter-btn" data-filter="ml">Machine Learning</button>
+                    <button class="filter-btn" data-filter="cv">Computer Vision</button>
+                    <button class="filter-btn" data-filter="nlp">NLP</button>
+                </div>
+                
+                <div class="projects-grid">
+                    <div class="project-card" data-category="cv ml">
+                        <div class="project-image-container">
+                            <img src="https://via.placeholder.com/600x300/2B2A4C/FFFFFF?text=Image+Recognition" alt="Image Recognition" class="project-image">
+                            <div class="project-overlay">
+                                <a href="#" class="view-project">
+                                    <i class="fas fa-arrow-right"></i>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="project-content">
+                            <h3 class="project-title">Image Recognition System</h3>
+                            <p class="project-description">Deep learning model for object detection and classification with high accuracy.</p>
+                            <div class="project-tags">
+                                <span class="project-tag">Python</span>
+                                <span class="project-tag">TensorFlow</span>
+                                <span class="project-tag">OpenCV</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="project-card" data-category="nlp">
+                        <div class="project-image-container">
+                            <img src="https://via.placeholder.com/600x300/B31312/FFFFFF?text=NLP+Chatbot" alt="NLP Chatbot" class="project-image">
+                            <div class="project-overlay">
+                                <a href="#" class="view-project">
+                                    <i class="fas fa-arrow-right"></i>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="project-content">
+                            <h3 class="project-title">NLP Chatbot</h3>
+                            <p class="project-description">Intelligent conversational agent using natural language processing to understand user queries.</p>
+                            <div class="project-tags">
+                                <span class="project-tag">Python</span>
+                                <span class="project-tag">NLTK</span>
+                                <span class="project-tag">Transformers</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="project-card" data-category="ml">
+                        <div class="project-image-container">
+                            <img src="https://via.placeholder.com/600x300/0C134F/FFFFFF?text=Predictive+Analytics" alt="Predictive Analytics" class="project-image">
+                            <div class="project-overlay">
+                                <a href="#" class="view-project">
+                                    <i class="fas fa-arrow-right"></i>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="project-content">
+                            <h3 class="project-title">Predictive Analytics Dashboard</h3>
+                            <p class="project-description">Data analysis tool using machine learning to predict trends and provide actionable insights.</p>
+                            <div class="project-tags">
+                                <span class="project-tag">Python</span>
+                                <span class="project-tag">Scikit-learn</span>
+                                <span class="project-tag">Plotly</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer Section -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-top">
+                <div class="footer-left">
+                    <h2 class="footer-heading">Let's start</h2>
+                    <p class="footer-subheading">Ready to bring your ideas to life?</p>
+                    <a href="mailto:gnaneswardamarasingu@gmail.com" class="footer-email">gnaneswardamarasingu@gmail.com</a>
+                </div>
+                
+                <div class="footer-right">
+                    <a href="contact.html" class="footer-cta">
+                        Get a quote
+                        <span class="cta-arrow">
+                            <i class="fas fa-arrow-right"></i>
+                        </span>
+                    </a>
+                    
+                    <div class="footer-contact">
+                        <a href="tel:+919391376258" class="footer-phone">+91 9391376258</a>
+                        <p class="footer-timezone">Andhra Pradesh / India (IST)</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-divider"></div>
+            
+            <div class="footer-bottom">
+                <div class="footer-social">
+                    <a href="https://github.com/Gnaneswar22" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="GitHub">
+                        <i class="fab fa-github"></i>
+                    </a>
+                    <a href="https://www.linkedin.com/in/gnaneswar-damarasingu/" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="LinkedIn">
+                        <i class="fab fa-linkedin-in"></i>
+                    </a>
+                    <a href="mailto:gnaneswardamarasingu@gmail.com" class="social-icon" aria-label="Email">
+                        <i class="fas fa-envelope"></i>
+                    </a>
+                </div>
+                
+                <div class="footer-back-to-top">
+                    <a href="#top" class="back-to-top-btn" aria-label="Back to top">
+                        <i class="fas fa-arrow-up"></i>
+                    </a>
+                </div>
+            </div>
+            
+            <div class="footer-copyright">
+                <p>&copy; 2025 Gnaneswar Damarasingu. All rights reserved.</p>
+                <div class="footer-links">
+                    <a href="#privacy">Privacy Policy</a>
+                    <span class="footer-separator">|</span>
+                    <a href="#terms">Terms of Service</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script type="module" src="https://unpkg.com/@splinetool/viewer@1.10.14/build/spline-viewer.js"></script>
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script>
+        // Web Development Skills
+        const webDevSkills = [
+            {
+                name: 'React',
+                icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg',
+                description: 'Building modern, fast, and responsive web interfaces using React.js. Proficient in state management, hooks, and component architecture.'
+            },
+            {
+                name: 'JavaScript',
+                icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg',
+                description: 'Developing interactive web applications using modern JavaScript (ES6+). Proficient in DOM manipulation and asynchronous programming.'
+            },
+            {
+                name: 'HTML5',
+                icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg',
+                description: 'Creating semantic and accessible web pages using HTML5 features. Expertise includes proper document structure and best practices.'
+            },
+            {
+                name: 'CSS3',
+                icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg',
+                description: 'Crafting responsive and visually appealing interfaces using CSS3. Experienced with Flexbox, Grid, animations, and transitions.'
+            },
+            {
+                name: 'Node.js',
+                icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg',
+                description: 'Building scalable backend services with Node.js. Proficient with event-driven architecture and asynchronous programming.'
+            },
+            {
+                name: 'TypeScript',
+                icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg',
+                description: 'Writing type-safe code with TypeScript to improve code quality and developer experience.'
+            },
+            {
+                name: 'MongoDB',
+                icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg',
+                description: 'Designing and implementing NoSQL database solutions with MongoDB. Skilled in schema design and queries.'
+            },
+            {
+                name: 'Git',
+                icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg',
+                description: 'Managing code using Git version control. Proficient with branching strategies and collaborative workflows.'
+            },
+            {
+                name: 'Figma',
+                icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/figma/figma-original.svg',
+                description: 'Creating and implementing designs using Figma. Experienced with UI/UX design principles and prototyping.'
+            },
+            {
+                name: 'Next.js',
+                icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nextjs/nextjs-original.svg',
+                description: 'Building production-ready React applications with Next.js for server-side rendering and static site generation.'
+            },
+            {
+                name: 'Redux',
+                icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/redux/redux-original.svg',
+                description: 'Managing complex application state with Redux. Proficient with Redux Toolkit and middleware.'
+            },
+            {
+                name: 'SASS',
+                icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/sass/sass-original.svg',
+                description: 'Creating maintainable and modular CSS with SASS. Skilled in variables, mixins, and nested rules for efficient styling.'
+            }
+        ];
+        
+        // AI/ML Skills
+        const aimlSkills = [
+            {
+                name: 'Python',
+                icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg',
+                description: 'Creating AI/ML solutions with Python. Experienced in data analysis, model training, and deploying machine learning applications.'
+            },
+            {
+                name: 'TensorFlow',
+                icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tensorflow/tensorflow-original.svg',
+                description: 'Building and training neural networks with TensorFlow. Experienced in deep learning models for various applications.'
+            },
+            {
+                name: 'PyTorch',
+                icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/pytorch/pytorch-original.svg',
+                description: 'Developing deep learning models with PyTorch. Skilled in neural networks for computer vision and NLP tasks.'
+            },
+            {
+                name: 'Pandas',
+                icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/pandas/pandas-original.svg',
+                description: 'Data manipulation and analysis using Pandas. Proficient in handling large datasets and preparing data for machine learning.'
+            },
+            {
+                name: 'NumPy',
+                icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/numpy/numpy-original.svg',
+                description: 'Numerical computing with NumPy. Experienced in array operations and mathematical functions for scientific computing.'
+            },
+            {
+                name: 'Scikit-learn',
+                icon: 'https://upload.wikimedia.org/wikipedia/commons/0/05/Scikit_learn_logo_small.svg',
+                description: 'Implementing machine learning algorithms with Scikit-learn. Skilled in classification, regression, and clustering models.'
+            },
+            {
+                name: 'Keras',
+                icon: 'https://upload.wikimedia.org/wikipedia/commons/a/ae/Keras_logo.svg',
+                description: 'Building neural networks with Keras. Experienced in creating and training models with this high-level API.'
+            },
+            {
+                name: 'OpenCV',
+                icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/opencv/opencv-original.svg',
+                description: 'Computer vision applications with OpenCV. Skilled in image processing and video analysis techniques.'
+            },
+            {
+                name: 'NLTK',
+                icon: 'https://www.vectorlogo.zone/logos/nltk/nltk-icon.svg',
+                description: 'Natural language processing with NLTK. Experienced in text analysis, tokenization, and sentiment analysis.'
+            },
+            {
+                name: 'Matplotlib',
+                icon: 'https://upload.wikimedia.org/wikipedia/commons/8/84/Matplotlib_icon.svg',
+                description: 'Data visualization with Matplotlib. Creating informative plots and charts to communicate insights from data.'
+            },
+            {
+                name: 'Jupyter',
+                icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/jupyter/jupyter-original.svg',
+                description: 'Interactive computing with Jupyter notebooks. Skilled in creating reproducible data science workflows.'
+            },
+            {
+                name: 'SQL',
+                icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg',
+                description: 'Data querying and management with SQL. Experienced in database operations for data science applications.'
+            }
+        ];
+        
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize AOS with longer durations
+            AOS.init({
+                duration: 1000,
+                easing: 'ease-out',
+                once: true,
+                startEvent: 'DOMContentLoaded'
+            });
+            
+            // Hide loader after page loads
+            setTimeout(() => {
+                document.querySelector('.loader').style.display = 'none';
+            }, 2000); // Reduced to 2 seconds for better UX
+            
+            // Set up profile icon and side navigation
+            setupNavigation();
+            
+            // Initialize skills wheels
+            initializeSkillsWheel('webDevOrbitalCircle', webDevSkills, '.skills-web-domain');
+            initializeSkillsWheel('aimlOrbitalCircle', aimlSkills, '.skills-aiml-domain');
+            
+            // Initialize projects
+            initializeProjects();
+            
+            // Set up domain switching
+            setupDomainSwitcher();
+            
+            // Cursor trail effect - optimized for performance
+            document.addEventListener("mousemove", function(e) {
+                // Limit the frequency of trail creation
+                if (Math.random() > 0.85) {
+                    const trail = document.createElement("div");
+                    trail.className = "trail";
+                    
+                    const size = Math.random() * 4 + 3;
+                    trail.style.background = '#ffffff66';
+                    trail.style.width = trail.style.height = `${size}px`;
+                    
+                    trail.style.left = `${e.pageX - size / 2}px`;
+                    trail.style.top = `${e.pageY - size / 2}px`;
+                    
+                    document.body.appendChild(trail);
+                    
+                    setTimeout(() => {
+                        trail.remove();
+                    }, 800);
+                }
+            });
+        });
+        
+        function setupNavigation() {
+            const profileIcon = document.getElementById('profileIcon');
+            const sideNav = document.getElementById('sideNav');
+            const sideNavClose = document.getElementById('sideNavClose');
+            const navOverlay = document.getElementById('navOverlay');
+            const sideDropdown = document.querySelector('.side-dropdown');
+            const sideDropdownToggle = document.querySelector('.side-dropdown-toggle');
+            
+            // Open side nav when profile icon is clicked
+            if (profileIcon) {
+                profileIcon.addEventListener('click', function() {
+                    sideNav.classList.add('active');
+                    navOverlay.classList.add('active');
+                    document.body.style.overflow = 'hidden';
+                });
+            }
+            
+            // Close side nav when close button is clicked
+            if (sideNavClose) {
+                sideNavClose.addEventListener('click', function() {
+                    sideNav.classList.remove('active');
+                    navOverlay.classList.remove('active');
+                    document.body.style.overflow = 'auto';
+                });
+            }
+            
+            // Close side nav when overlay is clicked
+            if (navOverlay) {
+                navOverlay.addEventListener('click', function() {
+                    sideNav.classList.remove('active');
+                    navOverlay.classList.remove('active');
+                    document.body.style.overflow = 'auto';
+                });
+            }
+            
+            // Toggle dropdown in side nav
+            if (sideDropdownToggle) {
+                sideDropdownToggle.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    sideDropdown.classList.toggle('active');
+                });
+            }
+            
+            // Smooth scroll for navigation links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    const targetId = this.getAttribute('href');
+                    if (targetId === '#') return;
+                    
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        e.preventDefault();
+                        
+                        // Close side nav if it's open
+                        sideNav.classList.remove('active');
+                        navOverlay.classList.remove('active');
+                        document.body.style.overflow = 'auto';
+                        
+                        // Scroll to target
+                        targetElement.scrollIntoView({
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+
+            // Close side nav when clicking on a link
+            document.querySelectorAll('.side-nav a:not(.side-dropdown-toggle)').forEach(link => {
+                link.addEventListener('click', function() {
+                    sideNav.classList.remove('active');
+                    navOverlay.classList.remove('active');
+                    document.body.style.overflow = 'auto';
+                });
             });
         }
         
-        // Approach 3: Add a global style that might affect shadow DOM
-        const globalStyle = document.createElement('style');
-        globalStyle.textContent = `
-            spline-viewer::part(watermark),
-            spline-viewer::shadow(.watermark),
-            spline-viewer::shadow([class*="watermark"]) {
-                display: none !important;
-                opacity: 0 !important;
-                visibility: hidden !important;
-            }
-        `;
-        document.head.appendChild(globalStyle);
+        function initializeSkillsWheel(orbitalCircleId, skills, containerSelector) {
+            const orbitalCircle = document.getElementById(orbitalCircleId);
+            if (!orbitalCircle) return;
+            
+            const container = document.querySelector(containerSelector);
+            const centralSkillIcon = container.querySelector('.central-skill-icon img');
+            const centralSkillName = container.querySelector('.central-skill h3');
+            const centralSkillDescription = container.querySelector('.central-skill-description');
+            
+            // Place technology icons in a circle
+            const radius = window.innerWidth < 768 ? 150 : 250; // Responsive radius
+            const totalIcons = skills.length;
+            
+            skills.forEach((skill, index) => {
+                // Calculate position on the circle
+                const angle = (index / totalIcons) * 2 * Math.PI;
+                const x = radius * Math.cos(angle);
+                const y = radius * Math.sin(angle);
+                
+                // Create tech icon element
+                const techIcon = document.createElement('div');
+                techIcon.className = 'tech-icon';
+                techIcon.style.left = `calc(50% + ${x}px)`;
+                techIcon.style.top = `calc(50% + ${y}px)`;
+                techIcon.style.transform = 'translate(-50%, -50%)';
+                
+                // Create image element
+                const img = document.createElement('img');
+                img.src = skill.icon;
+                img.alt = skill.name;
+                techIcon.appendChild(img);
+                
+                // Add skill name label
+                const nameLabel = document.createElement('span');
+                nameLabel.className = 'tech-name';
+                nameLabel.textContent = skill.name;
+                techIcon.appendChild(nameLabel);
+                
+                // Add hover/click effects
+                const updateCentralSkill = function() {
+                    centralSkillIcon.src = skill.icon;
+                    centralSkillName.textContent = skill.name;
+                    centralSkillDescription.textContent = skill.description;
+                    container.querySelector('.central-skill').style.boxShadow = '0 0 80px rgba(70, 0, 123, 0.8)';
+                };
+                
+                techIcon.addEventListener('mouseenter', updateCentralSkill);
+                techIcon.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    updateCentralSkill();
+                });
+                
+                // Add to orbital circle
+                orbitalCircle.appendChild(techIcon);
+            });
+            
+            // Start rotation animation for this orbital circle
+            startRotation(orbitalCircleId, skills.length);
+        }
         
-        // Approach 4: Try to use MutationObserver to catch watermark when it's added
-        const observer = new MutationObserver(mutations => {
-            for (const mutation of mutations) {
-                if (mutation.addedNodes) {
-                    for (const node of mutation.addedNodes) {
-                        if (node.classList && 
-                            (node.classList.contains('watermark') || 
-                             node.className.includes('watermark'))) {
-                            node.style.display = 'none';
-                            node.remove();
-                        }
-                    }
+        function startRotation(orbitalCircleId, totalIcons) {
+            let angle = 0;
+            const rotateSpeed = 0.0001; // Slower rotation for better performance
+            const orbitalCircle = document.getElementById(orbitalCircleId);
+            if (!orbitalCircle) return;
+            
+            const icons = orbitalCircle.querySelectorAll('.tech-icon');
+            
+            function rotate() {
+                angle += rotateSpeed;
+                if (!document.hidden) {
+                    const currentRadius = window.innerWidth < 768 ? 150 : 250; // Responsive radius
+                    
+                    icons.forEach((icon, index) => {
+                        const iconAngle = angle + (index / totalIcons) * 2 * Math.PI;
+                        const x = currentRadius * Math.cos(iconAngle);
+                        const y = currentRadius * Math.sin(iconAngle);
+                        
+                        icon.style.left = `calc(50% + ${x}px)`;
+                        icon.style.top = `calc(50% + ${y}px)`;
+                    });
                 }
+                
+                requestAnimationFrame(rotate);
             }
-        });
-        
-        if (splineViewer) {
-            observer.observe(splineViewer, { childList: true, subtree: true });
-        }
-    }
-    
-    // Try multiple times to remove watermark
-    removeWatermark();
-    setTimeout(removeWatermark, 1000);
-    setTimeout(removeWatermark, 3000);
-    setTimeout(removeWatermark, 5000);
-    
-    // Skills with their icons and descriptions
-    const skills = [
-        {
-            name: 'React',
-            icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg',
-            description: 'Building modern, fast, and responsive web interfaces using React.js. Proficient in state management, hooks, and component architecture.'
-        },
-        {
-            name: 'JavaScript',
-            icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg',
-            description: 'Developing interactive web applications using modern JavaScript (ES6+). Proficient in DOM manipulation and asynchronous programming.'
-        },
-        {
-            name: 'HTML5',
-            icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg',
-            description: 'Creating semantic and accessible web pages using HTML5 features. Expertise includes proper document structure and best practices.'
-        },
-        {
-            name: 'CSS3',
-            icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg',
-            description: 'Crafting responsive and visually appealing interfaces using CSS3. Experienced with Flexbox, Grid, animations, and transitions.'
-        },
-        {
-            name: 'Node.js',
-            icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg',
-            description: 'Building scalable backend services with Node.js. Proficient with event-driven architecture and asynchronous programming.'
-        },
-        {
-            name: 'TypeScript',
-            icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg',
-            description: 'Writing type-safe code with TypeScript to improve code quality and developer experience.'
-        },
-        {
-            name: 'Python',
-            icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg',
-            description: 'Developing applications and scripts using Python. Experienced with data analysis and automation.'
-        },
-        {
-            name: 'MongoDB',
-            icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg',
-            description: 'Designing and implementing NoSQL database solutions with MongoDB. Skilled in schema design and queries.'
-        },
-        {
-            name: 'Git',
-            icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg',
-            description: 'Managing code using Git version control. Proficient with branching strategies and collaborative workflows.'
-        },
-        {
-            name: 'Figma',
-            icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/figma/figma-original.svg',
-            description: 'Creating and implementing designs using Figma. Experienced with UI/UX design principles and prototyping.'
-        },
-        {
-            name: 'Next.js',
-            icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nextjs/nextjs-original.svg',
-            description: 'Building production-ready React applications with Next.js for server-side rendering and static site generation.'
-        },
-        {
-            name: 'Redux',
-            icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/redux/redux-original.svg',
-            description: 'Managing complex application state with Redux. Proficient with Redux Toolkit and middleware.'
-        }
-    ];
-    
-    // Get the orbital circle element
-    const orbitalCircle = document.querySelector('.orbital-circle');
-    const centralSkillIcon = document.querySelector('.central-skill-icon img');
-    const centralSkillName = document.querySelector('.central-skill h3');
-    const centralSkillDescription = document.querySelector('.central-skill-description');
-    
-    // Place technology icons in a circle
-    const radius = window.innerWidth < 768 ? 150 : 250; // Responsive radius
-    const totalIcons = skills.length;
-    
-    skills.forEach((skill, index) => {
-        // Calculate position on the circle
-        const angle = (index / totalIcons) * 2 * Math.PI;
-        const x = radius * Math.cos(angle);
-        const y = radius * Math.sin(angle);
-        
-        // Create tech icon element
-        const techIcon = document.createElement('div');
-        techIcon.className = 'tech-icon';
-        techIcon.style.left = `calc(50% + ${x}px)`;
-        techIcon.style.top = `calc(50% + ${y}px)`;
-        techIcon.style.transform = 'translate(-50%, -50%)';
-        
-        // Create image element
-        const img = document.createElement('img');
-        img.src = skill.icon;
-        img.alt = skill.name;
-        techIcon.appendChild(img);
-        
-        // Add skill name label
-        const nameLabel = document.createElement('span');
-        nameLabel.className = 'tech-name';
-        nameLabel.textContent = skill.name;
-        techIcon.appendChild(nameLabel);
-        
-        // Add hover effect
-        techIcon.addEventListener('mouseenter', function() {
-            centralSkillIcon.src = skill.icon;
-            centralSkillName.textContent = skill.name;
-            centralSkillDescription.textContent = skill.description;
-            document.querySelector('.central-skill').style.boxShadow = '0 0 80px rgba(70, 0, 123, 0.8)';
-        });
-        
-        // Add click event
-        techIcon.addEventListener('click', function(e) {
-            e.stopPropagation();
-            centralSkillIcon.src = skill.icon;
-            centralSkillName.textContent = skill.name;
-            centralSkillDescription.textContent = skill.description;
-            console.log(`Clicked on ${skill.name}`);
-        });
-        
-        // Add to orbital circle
-        orbitalCircle.appendChild(techIcon);
-    });
-    
-    // Slow rotation animation for the orbital circle
-    let angle = 0;
-    const rotateSpeed = 0.0002; // Very slow rotation speed
-    
-    function rotateIcons() {
-        angle += rotateSpeed;
-        const icons = document.querySelectorAll('.tech-icon');
-        const currentRadius = window.innerWidth < 768 ? 150 : 250; // Responsive radius
-        
-        icons.forEach((icon, index) => {
-            const iconAngle = angle + (index / totalIcons) * 2 * Math.PI;
-            const x = currentRadius * Math.cos(iconAngle);
-            const y = currentRadius * Math.sin(iconAngle);
             
-            icon.style.left = `calc(50% + ${x}px)`;
-            icon.style.top = `calc(50% + ${y}px)`;
-        });
-        
-        requestAnimationFrame(rotateIcons);
-    }
-    
-    // Start rotation animation
-    rotateIcons();
-    
-    // Adjust orbital circle size on window resize
-    window.addEventListener('resize', function() {
-        const orbitalCircle = document.querySelector('.orbital-circle');
-        if (window.innerWidth < 768) {
-            orbitalCircle.style.width = '300px';
-            orbitalCircle.style.height = '300px';
-        } else {
-            orbitalCircle.style.width = '500px';
-            orbitalCircle.style.height = '500px';
+            rotate();
         }
-    });
-    
-    // Cursor trail effect
-    document.addEventListener("mousemove", function (e) {
-        const trail = document.createElement("div");
-        trail.className = "trail";
-        trail.style.pointerEvents = "none";
-
-        const colors = ['#ffffff66', '#00ffff88', '#ff00ff66'];
-        const size = Math.random() * 6 + 4;
-        trail.style.background = colors[Math.floor(Math.random() * colors.length)];
-        trail.style.width = trail.style.height = `${size}px`;
-
-        trail.style.left = `${e.pageX - size / 2}px`;
-        trail.style.top = `${e.pageY - size / 2}px`;
-
-        document.body.appendChild(trail);
-
-        setTimeout(() => {
-            trail.remove();
-        }, 1000);
-    });
-    
-    // Add click events to navigation links for testing
-    document.querySelectorAll('nav a').forEach(link => {
-        link.addEventListener('click', function(e) {
-            e.preventDefault();
-            console.log('Nav link clicked:', this.textContent);
-            const targetId = this.getAttribute('href');
-            const targetElement = document.querySelector(targetId);
-            if (targetElement) {
-                targetElement.scrollIntoView({ behavior: 'smooth' });
+        
+        function initializeProjects() {
+            // Project filtering functionality
+            setupFilterButtons('.web-dev-projects .filter-btn', '.web-dev-projects .project-card');
+            setupFilterButtons('.aiml-projects .filter-btn', '.aiml-projects .project-card');
+            
+            // Animation for project cards
+            animateProjectCards();
+        }
+        
+        function setupFilterButtons(buttonSelector, cardSelector) {
+            const filterButtons = document.querySelectorAll(buttonSelector);
+            const projectCards = document.querySelectorAll(cardSelector);
+            
+            filterButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    // Remove active class from all buttons in this group
+                    filterButtons.forEach(btn => btn.classList.remove('active'));
+                    
+                    // Add active class to clicked button
+                    this.classList.add('active');
+                    
+                    // Get filter value
+                    const filter = this.getAttribute('data-filter');
+                    
+                    // Filter projects
+                    projectCards.forEach(card => {
+                        const categories = card.getAttribute('data-category').split(' ');
+                        
+                        if (filter === 'all' || categories.includes(filter)) {
+                            card.style.display = 'block';
+                        } else {
+                            card.style.display = 'none';
+                        }
+                    });
+                });
+            });
+        }
+        
+        function resetFilters(buttonSelector) {
+            const filterButtons = document.querySelectorAll(buttonSelector);
+            filterButtons.forEach(btn => btn.classList.remove('active'));
+            
+            // Set 'All' button as active
+            const allButton = document.querySelector(`${buttonSelector}[data-filter="all"]`);
+            if (allButton) {
+                allButton.classList.add('active');
             }
-        });
-    });
-    
-    // Add click events to buttons for testing
-    document.querySelectorAll('.btn-get-started').forEach(button => {
-        button.addEventListener('click', function(e) {
-            e.preventDefault();
-            console.log('Button clicked:', this.textContent);
-        });
-    });
-    
-    // Function to check if an element is in viewport
-    function isInViewport(element) {
-        const rect = element.getBoundingClientRect();
-        return (
-            rect.top >= 0 &&
-            rect.left >= 0 &&
-            rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
-            rect.right <= (window.innerWidth || document.documentElement.clientWidth)
-        );
-    }
-    
-    // Highlight active section in navigation
-    function highlightNavigation() {
-        const sections = document.querySelectorAll('section[id]');
-        const navLinks = document.querySelectorAll('nav a');
+        }
         
-        sections.forEach(section => {
-            const sectionTop = section.offsetTop - 100;
-            const sectionHeight = section.clientHeight;
-            const sectionId = section.getAttribute('id');
+        function showAllProjects(cardSelector) {
+            const projectCards = document.querySelectorAll(cardSelector);
+            projectCards.forEach(card => {
+                card.style.display = 'block';
+            });
+        }
+        
+        function animateProjectCards() {
+            const projectCards = document.querySelectorAll('.project-card');
             
-            if (window.scrollY >= sectionTop && window.scrollY < sectionTop + sectionHeight) {
-                navLinks.forEach(link => {
-                    link.classList.remove('active');
-                    if (link.getAttribute('href') === `#${sectionId}`) {
-                        link.classList.add('active');
+            const projectObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                        projectObserver.unobserve(entry.target);
                     }
+                });
+            }, { threshold: 0.1 });
+            
+            projectCards.forEach(card => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(30px)';
+                card.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+                projectObserver.observe(card);
+            });
+        }
+        
+        function setupDomainSwitcher() {
+            const domainSwitch = document.getElementById('domainSwitch');
+            const domainIndicator = document.getElementById('domainIndicator');
+            const domainName = document.getElementById('domainName');
+            
+            // Domain elements
+            const webDevModel = document.querySelector('.web-dev-model');
+            const aimlModel = document.querySelector('.aiml-model');
+            const webDevDomain = document.querySelector('.web-dev-domain');
+            const aimlDomain = document.querySelector('.aiml-domain');
+            const webDevProjects = document.querySelector('.web-dev-projects');
+            const aimlProjects = document.querySelector('.aiml-projects');
+            const webDevSkills = document.querySelector('.skills-web-domain');
+            const aimlSkills = document.querySelector('.skills-aiml-domain');
+            
+            // Current domain state
+            let currentDomain = 'web-dev';
+            
+            // Domain switcher click event
+            if (domainSwitch) {
+                domainSwitch.addEventListener('click', function() {
+                    // Toggle domain
+                    if (currentDomain === 'web-dev') {
+                        // Switch to AIML domain
+                        webDevModel.classList.remove('active');
+                        aimlModel.classList.add('active');
+                        webDevDomain.classList.remove('active');
+                        aimlDomain.classList.add('active');
+                        webDevProjects.classList.remove('active');
+                        aimlProjects.classList.add('active');
+                        webDevSkills.classList.remove('active');
+                        aimlSkills.classList.add('active');
+                        domainName.textContent = 'AI/ML Engineering';
+                        currentDomain = 'aiml';
+                        
+                        // Reset filters when switching domains
+                        resetFilters('.aiml-projects .filter-btn');
+                        showAllProjects('.aiml-projects .project-card');
+                    } else {
+                        // Switch to Web Development domain
+                        aimlModel.classList.remove('active');
+                        webDevModel.classList.add('active');
+                        aimlDomain.classList.remove('active');
+                        webDevDomain.classList.add('active');
+                        aimlProjects.classList.remove('active');
+                        webDevProjects.classList.add('active');
+                        aimlSkills.classList.remove('active');
+                        webDevSkills.classList.add('active');
+                        domainName.textContent = 'Web Development';
+                        currentDomain = 'web-dev';
+                        
+                        // Reset filters when switching domains
+                        resetFilters('.web-dev-projects .filter-btn');
+                        showAllProjects('.web-dev-projects .project-card');
+                    }
+                    
+                    // Show domain indicator
+                    domainIndicator.classList.add('show');
+                    
+                    // Animate icon
+                    this.querySelector('i').style.transform = 'rotate(360deg)';
+                    
+                    // Hide domain indicator after 3 seconds
+                    setTimeout(() => {
+                        domainIndicator.classList.remove('show');
+                    }, 3000);
+                    
+                    // Reset rotation after animation completes
+                    setTimeout(() => {
+                        this.querySelector('i').style.transform = 'rotate(0)';
+                    }, 400);
+                });
+            }
+        }
+        
+        // Add interactive effects to footer elements
+        document.addEventListener('DOMContentLoaded', function() {
+            // Smooth scroll for back to top button
+            const backToTopBtn = document.querySelector('.back-to-top-btn');
+            if (backToTopBtn) {
+                backToTopBtn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    window.scrollTo({
+                        top: 0,
+                        behavior: 'smooth'
+                    });
+                });
+            }
+            
+            // Add minimal hover effects with JS instead of CSS transitions
+            const socialIcons = document.querySelectorAll('.footer .social-icon');
+            socialIcons.forEach(icon => {
+                icon.addEventListener('mouseenter', function() {
+                    this.style.backgroundColor = '#7f42a7';
+                    this.style.transform = 'translateY(-3px)';
+                });
+                
+                icon.addEventListener('mouseleave', function() {
+                    this.style.backgroundColor = 'rgba(255, 255, 255, 0.1)';
+                    this.style.transform = 'translateY(0)';
+                });
+            });
+            
+            const footerCta = document.querySelector('.footer-cta');
+            if (footerCta) {
+                const ctaArrow = footerCta.querySelector('.cta-arrow');
+                
+                footerCta.addEventListener('mouseenter', function() {
+                    this.style.borderColor = '#7f42a7';
+                    this.style.transform = 'translateY(-3px)';
+                    if (ctaArrow) ctaArrow.style.transform = 'translateX(5px)';
+                });
+                
+                footerCta.addEventListener('mouseleave', function() {
+                    this.style.borderColor = 'rgba(255, 255, 255, 0.2)';
+                    this.style.transform = 'translateY(0)';
+                    if (ctaArrow) ctaArrow.style.transform = 'translateX(0)';
+                });
+            }
+            
+            const footerEmail = document.querySelector('.footer-email');
+            if (footerEmail) {
+                footerEmail.addEventListener('mouseenter', function() {
+                    this.style.color = '#7f42a7';
+                });
+                
+                footerEmail.addEventListener('mouseleave', function() {
+                    this.style.color = '#ffffff';
                 });
             }
         });
+        // Cursor trail effect - enhanced for more visible trails
+document.addEventListener("mousemove", function(e) {
+    // Increased frequency of trail creation (lower threshold means more trails)
+    if (Math.random() > 0.4) { // Changed from 0.85 to 0.4 for more trails
+        const trail = document.createElement("div");
+        trail.className = "trail";
+        
+        // Increased size range for more visible trails
+        const size = Math.random() * 8 + 5; // Changed from 4+3 to 8+5 for larger trails
+        
+        // More vibrant colors with higher opacity
+        const colors = [
+            'rgba(255, 255, 255, 0.7)', 
+            'rgba(127, 66, 167, 0.7)', 
+            'rgba(102, 0, 197, 0.7)',
+            'rgba(200, 200, 255, 0.7)'
+        ];
+        
+        trail.style.background = colors[Math.floor(Math.random() * colors.length)];
+        trail.style.width = trail.style.height = `${size}px`;
+        
+        trail.style.left = `${e.pageX - size / 2}px`;
+        trail.style.top = `${e.pageY - size / 2}px`;
+        
+        document.body.appendChild(trail);
+        
+        // Longer duration for trails to remain visible
+        setTimeout(() => {
+            trail.remove();
+        }, 1200); // Increased from 800ms to 1200ms
     }
-    
-    // Add scroll event for navigation highlighting
-    window.addEventListener('scroll', highlightNavigation);
-    
-    // Initial call to highlightNavigation
-    highlightNavigation();
 });
-</script>
+
+    </script>
 </body>
-</html> 
+</html>

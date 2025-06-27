@@ -1,0 +1,812 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Achievements</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            background-color: black;
+            color: #e7e7e7;
+            min-height: 100vh;
+            line-height: 1.5;
+        }
+
+        /* GRADIENT AND LAYER BLUR EFFECT */
+        .image-gradient {
+            position: absolute;
+            top: 0;
+            right: 0;
+            opacity: 0.5;
+            z-index: -1;
+        }
+
+        .layer-blur {
+            height: 0;
+            width: 30rem;
+            position: absolute;
+            top: 20%;
+            right: 0;
+            box-shadow: 0 0 700px 15px white;
+            rotate: -30deg;
+            z-index: -1;
+        }
+
+        /* CONTAINER */
+        .container {
+            width: 100%;
+            margin: 0 auto;
+            padding: 0 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* HEADER */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 5rem;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            background-color: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(10px);
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 3rem;
+            font-weight: 300;
+        }
+
+        /* Profile Icon */
+        .profile-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            overflow: hidden;
+            cursor: pointer;
+            border: 2px solid rgba(127, 66, 167, 0.5);
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #7f42a7, #6600c5);
+        }
+
+        .profile-icon:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 15px rgba(127, 66, 167, 0.7);
+        }
+
+        .profile-icon img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* CURSOR ANIMATION - Enhanced */
+        .trail {
+            position: absolute;
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 9999;
+            animation: fadeTrail 1.2s ease-out forwards;
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+        }
+
+        @keyframes fadeTrail {
+            0% { transform: scale(1); opacity: 1; }
+            50% { opacity: 0.7; }
+            100% { transform: scale(0.3); opacity: 0; }
+        }
+
+      /* Side Navigation */
+        .side-nav {
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: 320px;
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1500;
+            transition: right 0.4s cubic-bezier(0.77, 0.2, 0.05, 1.0);
+            display: flex;
+            flex-direction: column;
+            padding: 80px 20px 20px;
+            box-shadow: -5px 0 15px rgba(0, 0, 0, 0.5);
+        }
+
+        .side-nav.active {
+            right: 0;
+        }
+
+        .side-nav-header {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .side-nav-logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            background: linear-gradient(to right, #7f42a7, #6600c5);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .side-nav-close {
+            font-size: 1.5rem;
+            color: #fff;
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+
+        .side-nav-links {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            overflow-y: auto;
+        }
+
+        .side-nav a {
+            padding: 15px 0;
+            font-size: 1rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            text-decoration: none;
+            color: #fff;
+            transition: color 0.3s ease;
+            display: block;
+        }
+
+        .side-nav a:hover {
+            color: #7f42a7;
+        }
+
+        .side-dropdown {
+            overflow: hidden;
+        }
+
+        .side-dropdown-content {
+            background: rgba(127, 66, 167, 0.1);
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+
+        .side-dropdown-content a {
+            padding-left: 30px;
+            font-size: 0.9rem;
+        }
+
+        .side-dropdown.active .side-dropdown-content {
+            max-height: 500px;
+        }
+
+        .side-dropdown-toggle {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .side-dropdown-toggle .arrow {
+            transition: transform 0.3s ease;
+        }
+
+        .side-dropdown.active .side-dropdown-toggle .arrow {
+            transform: rotate(180deg);
+        }
+
+        .contact-button {
+            display: block;
+            background: linear-gradient(to right, #7f42a7, #6600c5);
+            color: white;
+            text-align: center;
+            padding: 10px;
+            border-radius: 30px;
+            margin: 10px 0;
+            font-weight: 300;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .contact-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(126, 66, 167, 0.3);
+        }
+
+        .social-icons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 20px;
+            padding-bottom: 30px;
+        }
+
+        .social-icons a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border: none !important;
+            padding: 0 !important;
+        }
+
+        .social-icons a:hover {
+            background: rgba(127, 66, 167, 0.5);
+            transform: translateY(-3px);
+        }
+
+        .social-icons i {
+            font-size: 18px;
+        }
+
+        /* Overlay for side nav */
+        .nav-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1400;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .nav-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+
+        /* Mobile Profile Section */
+        .mobile-profile-section {
+            display: none;
+            align-items: center;
+            padding: 20px;
+            background: linear-gradient(to right, rgba(127, 66, 167, 0.2), rgba(102, 0, 197, 0.2));
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .mobile-profile-pic {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            overflow: hidden;
+            border: 2px solid rgba(127, 66, 167, 0.5);
+            background: linear-gradient(135deg, #7f42a7, #6600c5);
+            margin-right: 15px;
+        }
+
+        .mobile-profile-pic img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .mobile-profile-info {
+            flex: 1;
+        }
+
+        .mobile-profile-name {
+            font-weight: 600;
+            font-size: 1.1rem;
+            margin-bottom: 3px;
+        }
+
+        .mobile-profile-title {
+            font-size: 0.85rem;
+            color: #999;
+        }
+
+        /* Achievements Section */
+        .achievements-section {
+            padding: 120px 20px 60px;
+            background: linear-gradient(90deg, #000000 0%, #000000 50%, #1a1a1a 100%);
+            min-height: 100vh;
+        }
+
+        .section-title {
+            font-size: 3rem;
+            text-align: center;
+            margin-bottom: 40px;
+            color: #f5f5f5;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background: linear-gradient(90deg, #7f42a7, #6600c5);
+        }
+
+        /* Achievement Cards */
+        .achievements-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+        }
+
+        .achievement-card {
+            background: rgba(25, 25, 25, 0.8);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 6px 25px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+
+        .achievement-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(127, 66, 167, 0.2);
+        }
+
+        .achievement-banner {
+            height: 150px;
+            position: relative;
+            overflow: hidden;
+            background: linear-gradient(135deg, #7f42a7, #6600c5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .achievement-icon {
+            font-size: 4rem;
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .achievement-content {
+            padding: 25px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .achievement-title {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+            color: #f5f5f5;
+        }
+
+        .achievement-date {
+            display: inline-block;
+            background: rgba(127, 66, 167, 0.2);
+            border: 1px solid rgba(127, 66, 167, 0.5);
+            color: #ddd;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            margin-bottom: 15px;
+            align-self: flex-start;
+        }
+
+        .achievement-description {
+            color: #ccc;
+            margin-bottom: 20px;
+            line-height: 1.6;
+            flex-grow: 1;
+        }
+
+        .achievement-footer {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-top: auto;
+        }
+
+        .achievement-issuer {
+            font-size: 0.9rem;
+            color: #999;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .achievement-link {
+            background: linear-gradient(135deg, #7f42a7, #6600c5);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 25px;
+            font-size: 0.9rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+
+        .achievement-link:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(127, 66, 167, 0.3);
+        }
+
+        .back-button {
+            position: fixed;
+            bottom: 30px;
+            left: 30px;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #7f42a7, #6600c5);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            text-decoration: none;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease;
+            z-index: 1000;
+        }
+
+        .back-button:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 20px rgba(126, 66, 167, 0.5);
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 1024px) {
+            .achievements-container {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            header {
+                padding: 1rem 2rem;
+            }
+            
+            .achievements-container {
+                grid-template-columns: 1fr;
+                max-width: 500px;
+            }
+            
+            .mobile-profile-section {
+                display: flex;
+            }
+        }
+
+        @media (max-width: 480px) {
+            header {
+                padding: 0.7rem 1rem;
+            }
+
+            header h1 {
+                font-size: 1.5rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .side-nav {
+                width: 280px;
+            }
+            
+            .achievement-banner {
+                height: 120px;
+            }
+            
+            .achievement-icon {
+                font-size: 3rem;
+            }
+            
+            .achievement-title {
+                font-size: 1.3rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <img class="image-gradient" src="gradient.png" alt="gradient">
+    <div class="layer-blur"></div>
+
+    <div class="container">
+       <header>
+            <h1 data-aos="fade-down" data-aos-duration="1500" class="logo">Gnaneswar</h1>
+
+            <!-- Profile Icon -->
+            <div class="profile-icon" id="profileIcon">
+                <img src="profile_icon.png" alt="Profile">
+            </div>
+        </header>
+
+        <!-- Side Navigation -->
+        <div class="side-nav" id="sideNav">
+            <div class="side-nav-header">
+                <div class="side-nav-logo">Gnaneswar</div>
+                <button class="side-nav-close" id="sideNavClose">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+
+            <div class="side-nav-links">
+                <a href="#skills">Skills</a>
+                <a href="#education">Education</a>
+                <a href="#projects">Projects</a>
+                <div class="side-dropdown">
+                    <a href="#" class="side-dropdown-toggle">
+                        Experience
+                        <span class="arrow">▼</span>
+                    </a>
+                    <div class="side-dropdown-content">
+                        <a href="certifications.html">Certifications</a>
+                        <a href="internships.html">Internships</a>
+                        <a href="achievements.html">Achievements</a>
+                    </div>
+                </div>
+                
+            </div>
+
+            <!-- Contact Button -->
+            <a href="contact.html" class="contact-button">Contact Me</a>
+
+            <!-- Social Media Icons -->
+            <div class="social-icons">
+                <a href="https://www.linkedin.com/in/gnaneswar-damarasingu/" target="_blank" aria-label="LinkedIn">
+                    <i class="fab fa-linkedin-in"></i>
+                </a>
+                <a href="https://github.com/Gnaneswar22" target="_blank" aria-label="GitHub">
+                    <i class="fab fa-github"></i>
+                </a>
+                <a href="mailto:gnaneswardamarasingu@gmail.com" aria-label="Email">
+                    <i class="far fa-envelope"></i>
+                </a>
+            </div>
+        </div>
+
+        <!-- Overlay for side nav -->
+        <div class="nav-overlay" id="navOverlay"></div>
+
+    <!-- Mobile Profile Section - shown on mobile only -->
+    <div class="mobile-profile-section" id="mobileProfile">
+        <div class="mobile-profile-pic">
+            <img src="https://cdn1.iconfinder.com/data/icons/user-pictures/100/unknown-512.png" alt="Profile">
+        </div>
+        <div class="mobile-profile-info">
+            <div class="mobile-profile-name">Gnaneswar Damarasingu</div>
+            <div class="mobile-profile-title">Full Stack Developer</div>
+        </div>
+    </div>
+
+    <!-- Achievements Section -->
+    <section class="achievements-section">
+        <h2 class="section-title" data-aos="fade-down" data-aos-duration="1500">Honors & Awards</h2>
+        
+        <div class="achievements-container">
+            <div class="achievement-card" data-aos="fade-up" data-aos-duration="1200" data-aos-delay="100">
+                <div class="achievement-banner">
+                    <i class="achievement-icon fas fa-trophy"></i>
+                </div>
+                <div class="achievement-content">
+                    <h3 class="achievement-title">1st Place - National Hackathon</h3>
+                    <span class="achievement-date">October 2024</span>
+                    <p class="achievement-description">Won first place in the National AI Innovation Hackathon for developing an assistive technology solution that helps visually impaired individuals navigate indoor environments using computer vision.</p>
+                    <div class="achievement-footer">
+                        <div class="achievement-issuer"><i class="fas fa-award"></i> Tech Innovation Foundation</div>
+                        <a href="#" class="achievement-link"><i class="fas fa-external-link-alt"></i> View</a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="achievement-card" data-aos="fade-up" data-aos-duration="1200" data-aos-delay="200">
+                <div class="achievement-banner">
+                    <i class="achievement-icon fas fa-medal"></i>
+                </div>
+                <div class="achievement-content">
+                    <h3 class="achievement-title">Dean's List Scholar</h3>
+                    <span class="achievement-date">2022 - 2024</span>
+                    <p class="achievement-description">Recognized for academic excellence by maintaining a GPA above 3.8 for four consecutive semesters. Selected among top 5% of students in the Computer Science department.</p>
+                    <div class="achievement-footer">
+                        <div class="achievement-issuer"><i class="fas fa-university"></i> University of Technology</div>
+                        <a href="#" class="achievement-link"><i class="fas fa-external-link-alt"></i> View</a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="achievement-card" data-aos="fade-up" data-aos-duration="1200" data-aos-delay="300">
+                <div class="achievement-banner">
+                    <i class="achievement-icon fas fa-star"></i>
+                </div>
+                <div class="achievement-content">
+                    <h3 class="achievement-title">Best Research Paper</h3>
+                    <span class="achievement-date">May 2023</span>
+                    <p class="achievement-description">Awarded for the research paper "Optimizing Neural Networks for Edge Devices" at the International Conference on Machine Learning Applications. Paper was published in the IEEE journal.</p>
+                    <div class="achievement-footer">
+                        <div class="achievement-issuer"><i class="fas fa-book"></i> IEEE Computer Society</div>
+                        <a href="#" class="achievement-link"><i class="fas fa-external-link-alt"></i> View</a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="achievement-card" data-aos="fade-up" data-aos-duration="1200" data-aos-delay="100">
+                <div class="achievement-banner">
+                    <i class="achievement-icon fas fa-code"></i>
+                </div>
+                <div class="achievement-content">
+                    <h3 class="achievement-title">Open Source Contributor Award</h3>
+                    <span class="achievement-date">December 2023</span>
+                    <p class="achievement-description">Recognized as a top contributor to open-source projects for significant contributions to React ecosystem libraries and documentation. Contributed over 50 pull requests to various repositories.</p>
+                    <div class="achievement-footer">
+                        <div class="achievement-issuer"><i class="fab fa-github"></i> GitHub</div>
+                        <a href="#" class="achievement-link"><i class="fas fa-external-link-alt"></i> View</a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="achievement-card" data-aos="fade-up" data-aos-duration="1200" data-aos-delay="200">
+                <div class="achievement-banner">
+                    <i class="achievement-icon fas fa-lightbulb"></i>
+                </div>
+                <div class="achievement-content">
+                    <h3 class="achievement-title">Innovation Challenge Winner</h3>
+                    <span class="achievement-date">July 2023</span>
+                    <p class="achievement-description">Won the company-wide innovation challenge for developing a tool that automated repetitive tasks and improved team productivity by 35%. Solution was implemented across multiple departments.</p>
+                    <div class="achievement-footer">
+                        <div class="achievement-issuer"><i class="fas fa-building"></i> Microsoft</div>
+                        <a href="#" class="achievement-link"><i class="fas fa-external-link-alt"></i> View</a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="achievement-card" data-aos="fade-up" data-aos-duration="1200" data-aos-delay="300">
+                <div class="achievement-banner">
+                    <i class="achievement-icon fas fa-graduation-cap"></i>
+                </div>
+                <div class="achievement-content">
+                    <h3 class="achievement-title">Merit Scholarship</h3>
+                    <span class="achievement-date">2021 - 2025</span>
+                    <p class="achievement-description">Awarded a full-tuition merit scholarship based on academic excellence and leadership potential. Selected from over 5,000 applicants nationwide.</p>
+                    <div class="achievement-footer">
+                        <div class="achievement-issuer"><i class="fas fa-university"></i> National Education Foundation</div>
+                        <a href="#" class="achievement-link"><i class="fas fa-external-link-alt"></i> View</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Back Button -->
+    <a href="index.html" class="back-button"><i class="fas fa-home"></i></a>
+
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script>
+        // Initialize AOS with longer durations
+        AOS.init({
+            duration: 1000,
+            easing: 'ease-out',
+            once: true,
+            startEvent: 'DOMContentLoaded'
+        });
+        
+        // Side Navigation Setup
+        document.addEventListener('DOMContentLoaded', function() {
+            const profileIcon = document.getElementById('profileIcon');
+            const mobileProfile = document.getElementById('mobileProfile');
+            const sideNav = document.getElementById('sideNav');
+            const sideNavClose = document.getElementById('sideNavClose');
+            const navOverlay = document.getElementById('navOverlay');
+            const sideDropdown = document.querySelector('.side-dropdown');
+            const sideDropdownToggle = document.querySelector('.side-dropdown-toggle');
+            
+            // Open side nav when profile icon is clicked
+            if (profileIcon) {
+                profileIcon.addEventListener('click', function() {
+                    sideNav.classList.add('active');
+                    navOverlay.classList.add('active');
+                    document.body.style.overflow = 'hidden';
+                });
+            }
+            
+            // Open side nav when mobile profile is clicked
+            if (mobileProfile) {
+                mobileProfile.addEventListener('click', function() {
+                    sideNav.classList.add('active');
+                    navOverlay.classList.add('active');
+                    document.body.style.overflow = 'hidden';
+                });
+            }
+            
+            // Close side nav when close button is clicked
+            if (sideNavClose) {
+                sideNavClose.addEventListener('click', function() {
+                    sideNav.classList.remove('active');
+                    navOverlay.classList.remove('active');
+                    document.body.style.overflow = 'auto';
+                });
+            }
+            
+            // Close side nav when overlay is clicked
+            if (navOverlay) {
+                navOverlay.addEventListener('click', function() {
+                    sideNav.classList.remove('active');
+                    navOverlay.classList.remove('active');
+                    document.body.style.overflow = 'auto';
+                });
+            }
+            
+            // Toggle dropdown in side nav
+            if (sideDropdownToggle) {
+                sideDropdownToggle.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    sideDropdown.classList.toggle('active');
+                });
+            }
+            
+            // Cursor trail effect - enhanced for more visible trails
+            document.addEventListener("mousemove", function(e) {
+                // Increased frequency of trail creation
+                if (Math.random() > 0.4) {
+                    const trail = document.createElement("div");
+                    trail.className = "trail";
+                    
+                    // Increased size range for more visible trails
+                    const size = Math.random() * 8 + 5;
+                    
+                    // More vibrant colors with higher opacity
+                    const colors = [
+                        'rgba(255, 255, 255, 0.7)', 
+                        'rgba(127, 66, 167, 0.7)', 
+                        'rgba(102, 0, 197, 0.7)',
+                        'rgba(200, 200, 255, 0.7)'
+                    ];
+                    
+                    trail.style.background = colors[Math.floor(Math.random() * colors.length)];
+                    trail.style.width = trail.style.height = `${size}px`;
+                    
+                    trail.style.left = `${e.pageX - size / 2}px`;
+                    trail.style.top = `${e.pageY - size / 2}px`;
+                    
+                    document.body.appendChild(trail);
+                    
+                    // Longer duration for trails to remain visible
+                    setTimeout(() => {
+                        trail.remove();
+                    }, 1200);
+                }
+            });
+        });
+    </script>
+</body>
+</html>
