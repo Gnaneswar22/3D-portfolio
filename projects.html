@@ -1,0 +1,1172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projects - Gnaneswar</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        /* Additional styles for projects page */
+        .projects-hero {
+            min-height: 40vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(90deg, #000000 0%, #000000 50%, #3b1a54 100%);
+            padding: 120px 20px 60px;
+            text-align: center;
+        }
+
+        .projects-hero h1 {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(to right, #ffffff, #4e9eff);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .projects-hero p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            color: #aaa;
+            margin: 0 auto;
+        }
+
+        .projects-main {
+            padding: 60px 0;
+            background-color: #000;
+        }
+
+        .projects-grid-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .project-filters-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 40px;
+            flex-wrap: wrap;
+        }
+
+        .filter-section {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin: 10px 0;
+        }
+
+        .search-section {
+            position: relative;
+            margin: 10px 0;
+        }
+
+        .search-input {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 30px;
+            padding: 10px 20px;
+            padding-left: 40px;
+            color: #fff;
+            font-size: 0.9rem;
+            width: 250px;
+            transition: all 0.3s ease;
+        }
+
+        .search-input:focus {
+            outline: none;
+            background: rgba(255, 255, 255, 0.15);
+            border-color: #4e9eff;
+            box-shadow: 0 0 10px rgba(78, 158, 255, 0.3);
+            width: 300px;
+        }
+
+        .search-icon {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #aaa;
+            pointer-events: none;
+        }
+
+        /* Enhanced project cards for projects page */
+        .project-card {
+            position: relative;
+            overflow: hidden;
+            border-radius: 12px;
+            background: rgba(25, 25, 25, 0.8);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            height: 400px;
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
+        }
+
+        .project-image-container {
+            height: 200px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .project-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .project-card:hover .project-image {
+            transform: scale(1.05);
+        }
+
+        .project-category {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            background: linear-gradient(135deg, #7f42a7, #6600c5);
+            color: white;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            z-index: 10;
+        }
+
+        .project-links {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            display: flex;
+            gap: 10px;
+            opacity: 0;
+            transform: translateY(-10px);
+            transition: opacity 0.3s ease, transform 0.3s ease;
+            z-index: 10;
+        }
+
+        .project-card:hover .project-links {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .project-content {
+            padding: 25px;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+        }
+
+        .project-meta {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 15px;
+            font-size: 0.8rem;
+            color: #aaa;
+        }
+
+        .project-date {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .project-title {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: #f5f5f5;
+            line-height: 1.3;
+        }
+
+        .project-description {
+            color: #bbb;
+            margin-bottom: 20px;
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        .project-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: auto;
+        }
+
+        .project-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .view-details {
+            color: #4e9eff;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+
+        .view-details:hover {
+            color: #7f42a7;
+        }
+
+        .view-details i {
+            transition: transform 0.3s ease;
+        }
+
+        .view-details:hover i {
+            transform: translateX(3px);
+        }
+
+        /* Projects Grid */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            margin-top: 30px;
+        }
+
+        /* Pagination */
+        .pagination {
+            display: flex;
+            justify-content: center;
+            gap: 5px;
+            margin-top: 60px;
+        }
+
+        .pagination-item {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            color: #fff;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .pagination-item:hover,
+        .pagination-item.active {
+            background: linear-gradient(135deg, #7f42a7, #6600c5);
+        }
+
+        .pagination-dots {
+            color: #aaa;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+        }
+
+        /* Project Page Groups */
+        .project-page {
+            display: none;
+        }
+
+        .project-page.active {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            margin-top: 30px;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 1200px) {
+            .project-page.active {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .projects-hero h1 {
+                font-size: 3rem;
+            }
+
+            .projects-hero p {
+                font-size: 1rem;
+            }
+
+            .project-filters-container {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .search-section {
+                width: 100%;
+                margin-top: 20px;
+            }
+
+            .search-input {
+                width: 100%;
+            }
+
+            .search-input:focus {
+                width: 100%;
+            }
+
+            .project-page.active {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .projects-hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .filter-section {
+                width: 100%;
+                overflow-x: auto;
+                padding-bottom: 10px;
+                -ms-overflow-style: none;
+                scrollbar-width: none;
+            }
+
+            .filter-section::-webkit-scrollbar {
+                display: none;
+            }
+
+            .filter-btn {
+                white-space: nowrap;
+            }
+        }
+
+        /* Side Dropdown Styles */
+        .side-dropdown {
+            position: relative;
+        }
+
+        .side-dropdown-toggle {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px 15px;
+            color: #fff;
+            text-decoration: none;
+        }
+
+        .side-dropdown-content {
+            display: none;
+            position: static; /* Changed to static */
+            width: 100%;
+            background-color: #222;
+            padding: 0;
+            box-shadow: none; /* Removed box-shadow */
+            z-index: 1;
+        }
+
+        .side-dropdown-content a {
+            display: block;
+            padding: 10px 15px;
+            color: #ddd;
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+        }
+
+        .side-dropdown-content a:hover {
+            background-color: #333;
+        }
+
+        .side-dropdown.active .side-dropdown-content {
+            display: block;
+        }
+
+        .arrow {
+            transition: transform 0.3s ease;
+        }
+
+        .side-dropdown.active .arrow {
+            transform: rotate(90deg);
+        }
+    </style>
+    
+</head>
+<body>
+    <!-- Device Notification -->
+    <div class="device-notification" id="deviceNotification">
+        <p>For best visual experience, please use a laptop or desktop computer.</p>
+        <button class="close-notification" id="closeNotification">×</button>
+    </div>
+
+    <img class="image-gradient" src="gradient.png" alt="gradient">
+    <div class="layer-blur"></div>
+
+    <header>
+      <h1 data-aos="fade-down" data-aos-duration="1500" class="logo">Gnaneswar</h1>
+  
+      <!-- Header Navigation -->
+      <div class="header-nav">
+          <!-- Info Button - only for mobile/tablet -->
+          <div class="info-button" id="infoButton">
+              <i class="fas fa-laptop"></i>
+          </div>
+  
+          <!-- Info Tooltip -->
+          <div class="info-tooltip" id="infoTooltip">
+              <h3>For Best Experience</h3>
+              <p>Please use a laptop or desktop computer to enjoy the full visual experience of this portfolio.</p>
+          </div>
+          
+          <!-- Profile Icon -->
+          <div class="profile-icon" id="profileIcon">
+              <img src="profile_icon.png" alt="Profile">
+          </div>
+      </div>
+    </header>
+
+    <!-- Side Navigation -->
+    <div class="side-nav" id="sideNav">
+        <div class="side-nav-header">
+            <div class="side-nav-logo">Gnaneswar</div>
+            <button class="side-nav-close" id="sideNavClose">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+
+        <div class="side-nav-links">
+            <a href="index.html">Home</a>
+            <a href="index.html#skills">Skills</a>
+            <a href="projects.html" class="active">Projects</a>
+            <a href="education.html">Education</a>
+            <div class="side-dropdown">
+                <a href="#" class="side-dropdown-toggle">
+                    Experience
+                    <span class="arrow">▼</span>
+                </a>
+                <div class="side-dropdown-content">
+                    <a href="certifications.html">Certifications</a>
+                    <a href="internships.html">Internships</a>
+                    <a href="achievements.html">Achievements</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Contact Button -->
+        <a href="#contact" class="contact-button">Contact Me</a>
+
+        <!-- Social Media Icons -->
+        <div class="social-icons">
+            <a href="https://www.linkedin.com/in/gnaneswar-damarasingu/" target="_blank" aria-label="LinkedIn">
+                <i class="fab fa-linkedin-in"></i>
+            </a>
+            <a href="https://github.com/Gnaneswar22" target="_blank" aria-label="GitHub">
+                <i class="fab fa-github"></i>
+            </a>
+            <a href="mailto:gnaneswardamarasingu@gmail.com" aria-label="Email">
+                <i class="far fa-envelope"></i>
+            </a>
+        </div>
+    </div>
+
+    <!-- Overlay for side nav -->
+    <div class="nav-overlay" id="navOverlay"></div>
+
+    <!-- Projects Hero Section -->
+    <section class="projects-hero">
+        <h1 data-aos="fade-up">Projects</h1>
+        <p data-aos="fade-up" data-aos-delay="100">A showcase of my recent work and creative projects across web development and AI/ML domains.</p>
+    </section>
+
+    <!-- Projects Main Section -->
+    <section class="projects-main">
+        <div class="projects-grid-container">
+            <!-- Projects Container for Web Dev (shown by default) -->
+            <div class="projects-container web-dev-projects active">
+                <!-- Project Filters Container -->
+                <div class="project-filters-container">
+                    <div class="filter-section">
+                        <button class="filter-btn active" data-filter="all">All</button>
+                        <button class="filter-btn" data-filter="web-development">Web Dev</button>
+                        <button class="filter-btn" data-filter="ui-ux">UI/UX</button>
+                        <button class="filter-btn" data-filter="mobile-app">Mobile</button>
+                    </div>
+                    
+                    <div class="search-section">
+                        <i class="fas fa-search search-icon"></i>
+                        <input type="text" class="search-input" placeholder="Search projects..." id="projectSearch">
+                    </div>
+                </div>
+                
+                <!-- Project Page 1 (First 6 projects) -->
+                <div class="project-page page-1 active">
+                    <!-- Project Card 1 -->
+                    <div class="project-card" data-category="react ui web-development">
+                        <div class="project-image-container">
+                            <span class="project-category">Web App</span>
+                            <img src="https://via.placeholder.com/600x300/2A2F4F/FFFFFF?text=E-Commerce+Platform" alt="E-Commerce Platform" class="project-image">
+                            <div class="project-links">
+                                <a href="https://github.com/username/project" class="project-link" data-tooltip="Git Repo">
+                                    <i class="fab fa-github"></i>
+                                </a>
+                                <a href="https://project-demo.com" class="project-link" data-tooltip="Live Demo">
+                                    <i class="fas fa-external-link-alt"></i>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="project-content">
+                            <div class="project-meta">
+                                <div class="project-date">
+                                    <i class="far fa-calendar-alt"></i>
+                                    <span>June 2023</span>
+                                </div>
+                                <div class="project-status">Completed</div>
+                            </div>
+                            <h3 class="project-title">E-Commerce Platform</h3>
+                            <p class="project-description">A full-stack e-commerce solution with product catalog, shopping cart, payment integration, and admin dashboard.</p>
+                            <div class="project-footer">
+                                <div class="project-tags">
+                                    <span class="project-tag">React</span>
+                                    <span class="project-tag">Node.js</span>
+                                    <span class="project-tag">MongoDB</span>
+                                </div>
+                                <a href="project-details.html?id=1" class="view-details">
+                                    Details <i class="fas fa-arrow-right"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Project Card 2 -->
+                    <div class="project-card" data-category="react ui web-design">
+                        <div class="project-image-container">
+                            <span class="project-category">Dashboard</span>
+                            <img src="https://via.placeholder.com/600x300/917FB3/FFFFFF?text=Admin+Dashboard" alt="Admin Dashboard" class="project-image">
+                            <div class="project-links">
+                                <a href="https://github.com/username/dashboard" class="project-link" data-tooltip="Git Repo">
+                                    <i class="fab fa-github"></i>
+                                </a>
+                                <a href="https://dashboard-demo.com" class="project-link" data-tooltip="Live Demo">
+                                    <i class="fas fa-external-link-alt"></i>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="project-content">
+                            <div class="project-meta">
+                                <div class="project-date">
+                                    <i class="far fa-calendar-alt"></i>
+                                    <span>April 2023</span>
+                                </div>
+                                <div class="project-status">Completed</div>
+                            </div>
+                            <h3 class="project-title">Admin Dashboard</h3>
+                            <p class="project-description">Responsive admin panel with data visualization, user management, dark mode support, and real-time analytics.</p>
+                            <div class="project-footer">
+                                <div class="project-tags">
+                                    <span class="project-tag">React</span>
+                                    <span class="project-tag">Material UI</span>
+                                    <span class="project-tag">Chart.js</span>
+                                </div>
+                                <a href="project-details.html?id=2" class="view-details">
+                                    Details <i class="fas fa-arrow-right"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Project Card 3 -->
+                    <div class="project-card" data-category="mobile-app ui-ux">
+                        <div class="project-image-container">
+                            <span class="project-category">Mobile App</span>
+                            <img src="https://via.placeholder.com/600x300/E5BEEC/333333?text=Task+Manager+App" alt="Task Manager App" class="project-image">
+                            <div class="project-links">
+                                <a href="https://github.com/username/taskmanager" class="project-link" data-tooltip="Git Repo">
+                                    <i class="fab fa-github"></i>
+                                </a>
+                                <a href="https://taskmanager-demo.com" class="project-link" data-tooltip="Live Demo">
+                                    <i class="fas fa-external-link-alt"></i>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="project-content">
+                            <div class="project-meta">
+                                <div class="project-date">
+                                    <i class="far fa-calendar-alt"></i>
+                                    <span>March 2023</span>
+                                </div>
+                                <div class="project-status">Completed</div>
+                            </div>
+                            <h3 class="project-title">Task Manager App</h3>
+                            <p class="project-description">Cross-platform mobile app for task management with real-time sync, notifications, and collaborative features.</p>
+                            <div class="project-footer">
+                                <div class="project-tags">
+                                    <span class="project-tag">React Native</span>
+                                    <span class="project-tag">Firebase</span>
+                                    <span class="project-tag">Redux</span>
+                                </div>
+                                <a href="project-details.html?id=3" class="view-details">
+                                    Details <i class="fas fa-arrow-right"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Project Card 4 -->
+                    <div class="project-card" data-category="web-development ui-ux">
+                        <div class="project-image-container">
+                            <span class="project-category">Web App</span>
+                            <img src="https://via.placeholder.com/600x300/2C3639/FFFFFF?text=Social+Media+Platform" alt="Social Media Platform" class="project-image">
+                            <div class="project-links">
+                                <a href="https://github.com/username/socialmedia" class="project-link" data-tooltip="Git Repo">
+                                    <i class="fab fa-github"></i>
+                                </a>
+                                <a href="https://socialmedia-demo.com" class="project-link" data-tooltip="Live Demo">
+                                    <i class="fas fa-external-link-alt"></i>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="project-content">
+                            <div class="project-meta">
+                                <div class="project-date">
+                                    <i class="far fa-calendar-alt"></i>
+                                    <span>January 2023</span>
+                                </div>
+                                <div class="project-status">Completed</div>
+                            </div>
+                            <h3 class="project-title">Social Media Platform</h3>
+                            <p class="project-description">A social networking platform with real-time chat, post sharing, user profiles, and content moderation.</p>
+                            <div class="project-footer">
+                                <div class="project-tags">
+                                    <span class="project-tag">React</span>
+                                    <span class="project-tag">Socket.io</span>
+                                    <span class="project-tag">Express</span>
+                                </div>
+                                <a href="project-details.html?id=4" class="view-details">
+                                    Details <i class="fas fa-arrow-right"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Project Card 5 -->
+                    <div class="project-card" data-category="web-design ui-ux">
+                        <div class="project-image-container">
+                            <span class="project-category">UI Design</span>
+                            <img src="https://via.placeholder.com/600x300/3F4E4F/FFFFFF?text=Portfolio+Website" alt="Portfolio Website" class="project-image">
+                            <div class="project-links">
+                                <a href="https://github.com/username/portfolio" class="project-link" data-tooltip="Git Repo">
+                                    <i class="fab fa-github"></i>
+                                </a>
+                                <a href="https://portfolio-demo.com" class="project-link" data-tooltip="Live Demo">
+                                    <i class="fas fa-external-link-alt"></i>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="project-content">
+                            <div class="project-meta">
+                                <div class="project-date">
+                                    <i class="far fa-calendar-alt"></i>
+                                    <span>December 2022</span>
+                                </div>
+                                <div class="project-status">Completed</div>
+                            </div>
+                            <h3 class="project-title">Portfolio Website</h3>
+                            <p class="project-description">Personal portfolio website with interactive animations, domain switching, and responsive design.</p>
+                            <div class="project-footer">
+                                <div class="project-tags">
+                                    <span class="project-tag">HTML/CSS</span>
+                                    <span class="project-tag">JavaScript</span>
+                                    <span class="project-tag">Spline 3D</span>
+                                </div>
+                                <a href="project-details.html?id=5" class="view-details">
+                                    Details <i class="fas fa-arrow-right"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Project Card 6 -->
+                    <div class="project-card" data-category="web-development">
+                        <div class="project-image-container">
+                            <span class="project-category">Web App</span>
+                            <img src="https://via.placeholder.com/600x300/A27B5C/FFFFFF?text=Weather+App" alt="Weather App" class="project-image">
+                            <div class="project-links">
+                                <a href="https://github.com/username/weather" class="project-link" data-tooltip="Git Repo">
+                                    <i class="fab fa-github"></i>
+                                </a>
+                                <a href="https://weather-demo.com" class="project-link" data-tooltip="Live Demo">
+                                    <i class="fas fa-external-link-alt"></i>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="project-content">
+                            <div class="project-meta">
+                                <div class="project-date">
+                                    <i class="far fa-calendar-alt"></i>
+                                    <span>November 2022</span>
+                                </div>
+                                <div class="project-status">Completed</div>
+                            </div>
+                            <h3 class="project-title">Weather Application</h3>
+                            <p class="project-description">Real-time weather forecast app with location detection, 7-day predictions, and interactive weather maps.</p>
+                            <div class="project-footer">
+                                <div class="project-tags">
+                                    <span class="project-tag">React</span>
+                                    <span class="project-tag">OpenWeather API</span>
+                                    <span class="project-tag">Leaflet</span>
+                                </div>
+                                <a href="project-details.html?id=6" class="view-details">
+                                    Details <i class="fas fa-arrow-right"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Project Page 2 (Last 6 projects) -->
+                <div class="project-page page-2">
+                    <!-- Project Card 7 -->
+                    <div class="project-card" data-category="web-development ui-ux">
+                        <div class="project-image-container">
+                            <span class="project-category">Web App</span>
+                            <img src="https://via.placeholder.com/600x300/4F4557/FFFFFF?text=Blog+Platform" alt="Blog Platform" class="project-image">
+                            <div class="project-links">
+                                <a href="https://github.com/username/blog-platform" class="project-link" data-tooltip="Git Repo">
+                                    <i class="fab fa-github"></i>
+                                </a>
+                                <a href="https://blog-platform-demo.com" class="project-link" data-tooltip="Live Demo">
+                                    <i class="fas fa-external-link-alt"></i>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="project-content">
+                            <div class="project-meta">
+                                <div class="project-date">
+                                    <i class="far fa-calendar-alt"></i>
+                                    <span>October 2022</span>
+                                </div>
+                                <div class="project-status">Completed</div>
+                            </div>
+                            <h3 class="project-title">Blog Publishing Platform</h3>
+                            <p class="project-description">Modern blog platform with rich text editing, SEO optimization, and integrated analytics for content creators.</p>
+                            <div class="project-footer">
+                                <div class="project-tags">
+                                    <span class="project-tag">Next.js</span>
+                                    <span class="project-tag">GraphQL</span>
+                                    <span class="project-tag">Prisma</span>
+                                </div>
+                                <a href="project-details.html?id=7" class="view-details">
+                                    Details <i class="fas fa-arrow-right"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Project Card 8 -->
+                    <div class="project-card" data-category="web-development">
+                        <div class="project-image-container">
+                            <span class="project-category">Web App</span>
+                            <img src="https://via.placeholder.com/600x300/393646/FFFFFF?text=Booking+System" alt="Booking System" class="project-image">
+                            <div class="project-links">
+                                <a href="https://github.com/username/booking-system" class="project-link" data-tooltip="Git Repo">
+                                    <i class="fab fa-github"></i>
+                                </a>
+                                <a href="https://booking-system-demo.com" class="project-link" data-tooltip="Live Demo">
+                                    <i class="fas fa-external-link-alt"></i>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="project-content">
+                            <div class="project-meta">
+                                <div class="project-date">
+                                    <i class="far fa-calendar-alt"></i>
+                                    <span>September 2022</span>
+                                </div>
+                                <div class="project-status">Completed</div>
+                            </div>
+                            <h3 class="project-title">Appointment Booking System</h3>
+                            <p class="project-description">Comprehensive booking system for service providers with calendar integration, automated reminders, and payment processing.</p>
+                            <div class="project-footer">
+                                <div class="project-tags">
+                                    <span class="project-tag">React</span>
+                                    <span class="project-tag">Express</span>
+                                    <span class="project-tag">MongoDB</span>
+                                </div>
+                                <a href="project-details.html?id=8" class="view-details">
+                                    Details <i class="fas fa-arrow-right"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Project Card 9 -->
+                    <div class="project-card" data-category="web-design ui-ux">
+                        <div class="project-image-container">
+                            <span class="project-category">UI Design</span>
+                            <img src="https://via.placeholder.com/600x300/6D5D6E/FFFFFF?text=Design+System" alt="Design System" class="project-image">
+                            <div class="project-links">
+                                <a href="https://github.com/username/design-system" class="project-link" data-tooltip="Git Repo">
+                                    <i class="fab fa-github"></i>
+                                </a>
+                                <a href="https://design-system-demo.com" class="project-link" data-tooltip="Live Demo">
+                                    <i class="fas fa-external-link-alt"></i>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="project-content">
+                            <div class="project-meta">
+                                <div class="project-date">
+                                    <i class="far fa-calendar-alt"></i>
+                                    <span>August 2022</span>
+                                </div>
+                                <div class="project-status">Completed</div>
+                            </div>
+                            <h3 class="project-title">Component Design System</h3>
+                            <p class="project-description">Comprehensive UI component library and design system with documentation, accessibility features, and theme customization.</p>
+                            <div class="project-footer">
+                                <div class="project-tags">
+                               
+                                    <span class="project-tag">Storybook</span>
+                                    <span class="project-tag">React</span>
+                                    <span class="project-tag">Styled Components</span>
+                                </div>
+                                <a href="project-details.html?id=9" class="view-details">
+                                    Details <i class="fas fa-arrow-right"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Project Card 10 -->
+                    <div class="project-card" data-category="mobile-app">
+                        <div class="project-image-container">
+                            <span class="project-category">Mobile App</span>
+                            <img src="https://via.placeholder.com/600x300/4F4557/FFFFFF?text=Fitness+Tracker" alt="Fitness Tracker" class="project-image">
+                            <div class="project-links">
+                                <a href="https://github.com/username/fitness-tracker" class="project-link" data-tooltip="Git Repo">
+                                    <i class="fab fa-github"></i>
+                                </a>
+                                <a href="https://fitness-tracker-demo.com" class="project-link" data-tooltip="Live Demo">
+                                    <i class="fas fa-external-link-alt"></i>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="project-content">
+                            <div class="project-meta">
+                                <div class="project-date">
+                                    <i class="far fa-calendar-alt"></i>
+                                    <span>July 2022</span>
+                                </div>
+                                <div class="project-status">Completed</div>
+                            </div>
+                            <h3 class="project-title">Fitness Tracking App</h3>
+                            <p class="project-description">Mobile fitness application with workout tracking, progress analytics, custom routines, and social sharing features.</p>
+                            <div class="project-footer">
+                                <div class="project-tags">
+                                    <span class="project-tag">Flutter</span>
+                                    <span class="project-tag">Firebase</span>
+                                    <span class="project-tag">BLoC</span>
+                                </div>
+                                <a href="project-details.html?id=10" class="view-details">
+                                    Details <i class="fas fa-arrow-right"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Project Card 11 -->
+                    <div class="project-card" data-category="web-development">
+                        <div class="project-image-container">
+                            <span class="project-category">Web App</span>
+                            <img src="https://via.placeholder.com/600x300/393646/FFFFFF?text=Real+Estate+Platform" alt="Real Estate Platform" class="project-image">
+                            <div class="project-links">
+                                <a href="https://github.com/username/real-estate" class="project-link" data-tooltip="Git Repo">
+                                    <i class="fab fa-github"></i>
+                                </a>
+                                <a href="https://real-estate-demo.com" class="project-link" data-tooltip="Live Demo">
+                                    <i class="fas fa-external-link-alt"></i>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="project-content">
+                            <div class="project-meta">
+                                <div class="project-date">
+                                    <i class="far fa-calendar-alt"></i>
+                                    <span>June 2022</span>
+                                </div>
+                                <div class="project-status">Completed</div>
+                            </div>
+                            <h3 class="project-title">Real Estate Listing Platform</h3>
+                            <p class="project-description">Property listing website with advanced search filters, virtual tours, mortgage calculator, and agent portal.</p>
+                            <div class="project-footer">
+                                <div class="project-tags">
+                                    <span class="project-tag">Vue.js</span>
+                                    <span class="project-tag">Node.js</span>
+                                    <span class="project-tag">PostgreSQL</span>
+                                </div>
+                                <a href="project-details.html?id=11" class="view-details">
+                                    Details <i class="fas fa-arrow-right"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Project Card 12 -->
+                    <div class="project-card" data-category="web-development ui-ux">
+                        <div class="project-image-container">
+                            <span class="project-category">Web App</span>
+                            <img src="https://via.placeholder.com/600x300/6D5D6E/FFFFFF?text=Learning+Management" alt="Learning Management" class="project-image">
+                            <div class="project-links">
+                                <a href="https://github.com/username/lms" class="project-link" data-tooltip="Git Repo">
+                                    <i class="fab fa-github"></i>
+                                </a>
+                                <a href="https://lms-demo.com" class="project-link" data-tooltip="Live Demo">
+                                    <i class="fas fa-external-link-alt"></i>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="project-content">
+                            <div class="project-meta">
+                                <div class="project-date">
+                                    <i class="far fa-calendar-alt"></i>
+                                    <span>May 2022</span>
+                                </div>
+                                <div class="project-status">Completed</div>
+                            </div>
+                            <h3 class="project-title">Learning Management System</h3>
+                            <p class="project-description">Educational platform with course creation tools, student progress tracking, assessment features, and certification system.</p>
+                            <div class="project-footer">
+                                <div class="project-tags">
+                                    <span class="project-tag">React</span>
+                                    <span class="project-tag">Django</span>
+                                    <span class="project-tag">PostgreSQL</span>
+                                </div>
+                                <a href="project-details.html?id=12" class="view-details">
+                                    Details <i class="fas fa-arrow-right"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Pagination -->
+            <div class="pagination">
+                <a href="#" class="pagination-item" id="prevPage">
+                    <i class="fas fa-angle-left"></i>
+                </a>
+                <a href="#" class="pagination-item active" id="page1">1</a>
+                <a href="#" class="pagination-item" id="page2">2</a>
+                <a href="#" class="pagination-item" id="nextPage">
+                    <i class="fas fa-angle-right"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+  
+<script type="module" src="https://unpkg.com/@splinetool/viewer@1.10.14/build/spline-viewer.js"></script>
+<script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+<script src="script.js"></script>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Initialize AOS
+        AOS.init({
+            duration: 1000,
+            easing: 'ease-out',
+            once: true,
+            startEvent: 'DOMContentLoaded'
+        });
+        
+        // Setup navigation
+        if (typeof setupNavigation === 'function') {
+            setupNavigation();
+        } else {
+            console.log('Navigation setup function not available');
+            // Simple navigation setup
+            const profileIcon = document.getElementById('profileIcon');
+            const sideNav = document.getElementById('sideNav');
+            const sideNavClose = document.getElementById('sideNavClose');
+            const navOverlay = document.getElementById('navOverlay');
+            
+            if (profileIcon && sideNav && sideNavClose && navOverlay) {
+                profileIcon.addEventListener('click', function() {
+                    sideNav.classList.add('active');
+                    navOverlay.classList.add('active');
+                });
+                
+                sideNavClose.addEventListener('click', function() {
+                    sideNav.classList.remove('active');
+                    navOverlay.classList.remove('active');
+                });
+                
+                navOverlay.addEventListener('click', function() {
+                    sideNav.classList.remove('active');
+                    navOverlay.classList.remove('active');
+                });
+            }
+        }
+        
+        // Setup dropdown menu
+        const dropdownToggle = document.querySelector('.side-dropdown-toggle');
+        if (dropdownToggle) {
+            dropdownToggle.addEventListener('click', function(e) {
+                e.preventDefault();
+                const parent = this.parentElement;
+                parent.classList.toggle('active');
+            });
+        }
+        
+        // Setup info button
+        if (typeof setupInfoButton === 'function') {
+            setupInfoButton();
+        } else {
+            console.log('Info button function not available');
+            // Simple info button setup
+            const infoButton = document.getElementById('infoButton');
+            const infoTooltip = document.getElementById('infoTooltip');
+            
+            if (infoButton && infoTooltip && window.innerWidth <= 1024) {
+                infoButton.style.display = 'flex';
+                
+                infoButton.addEventListener('click', function() {
+                    infoTooltip.classList.toggle('active');
+                });
+                
+                document.addEventListener('click', function(event) {
+                    if (!infoButton.contains(event.target) && !infoTooltip.contains(event.target)) {
+                        infoTooltip.classList.remove('active');
+                    }
+                });
+            } else if (infoButton) {
+                infoButton.style.display = 'none';
+            }
+        }
+        
+        // Setup device notification
+        if (typeof setupDeviceNotification === 'function') {
+            setupDeviceNotification();
+        } else {
+            console.log('Device notification function not available');
+            // Simple device notification setup
+            const deviceNotification = document.getElementById('deviceNotification');
+            const closeNotification = document.getElementById('closeNotification');
+            
+            if (deviceNotification && closeNotification && window.innerWidth <= 768) {
+                deviceNotification.style.display = 'block';
+                
+                closeNotification.addEventListener('click', function() {
+                    deviceNotification.style.display = 'none';
+                });
+            }
+        }
+        
+        // Direct implementation of search functionality
+        const projectSearchInput = document.getElementById('projectSearch');
+        if (projectSearchInput) {
+            projectSearchInput.addEventListener('keyup', function() {
+                const searchValue = this.value.toLowerCase();
+                const cards = document.querySelectorAll('.project-card');
+                
+                cards.forEach(function(card) {
+                    const title = card.querySelector('.project-title').textContent.toLowerCase();
+                    const desc = card.querySelector('.project-description').textContent.toLowerCase();
+                    const tags = Array.from(card.querySelectorAll('.project-tag')).map(tag => tag.textContent.toLowerCase());
+                    
+                    if (title.includes(searchValue) || 
+                        desc.includes(searchValue) || 
+                        tags.some(tag => tag.includes(searchValue))) {
+                        card.style.display = "";
+                    } else {
+                        card.style.display = "none";
+                    }
+                });
+            });
+        }
+        
+        // Setup category filters
+        setupProjectFilters();
+        setupPagination();
+    });
+
+    // Project filtering functionality
+    function setupProjectFilters() {
+        const filterButtons = document.querySelectorAll('.filter-btn');
+        const projectCards = document.querySelectorAll('.project-card');
+        
+        filterButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                // Remove active class from all buttons
+                filterButtons.forEach(btn => btn.classList.remove('active'));
+                // Add active class to clicked button
+                this.classList.add('active');
+                
+                const filter = this.getAttribute('data-filter');
+                
+                projectCards.forEach(card => {
+                    const categories = card.getAttribute('data-category').split(' ');
+                    
+                    if (filter === 'all' || categories.includes(filter)) {
+                        card.style.display = '';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+            });
+        });
+    }
+
+    function setupPagination() {
+        const prevPageBtn = document.getElementById('prevPage');
+        const nextPageBtn = document.getElementById('nextPage');
+        const page1Btn = document.getElementById('page1');
+        const page2Btn = document.getElementById('page2');
+
+        const page1 = document.querySelector('.project-page.page-1');
+        const page2 = document.querySelector('.project-page.page-2');
+
+        function showPage(pageNumber) {
+            if (pageNumber === 1) {
+                page1.classList.add('active');
+                page2.classList.remove('active');
+                page1Btn.classList.add('active');
+                page2Btn.classList.remove('active');
+            } else if (pageNumber === 2) {
+                page1.classList.remove('active');
+                page2.classList.add('active');
+                page1Btn.classList.remove('active');
+                page2Btn.classList.add('active');
+            }
+        }
+
+        // Initialize page 1
+        showPage(1);
+
+        // Add event listeners
+        page1Btn.addEventListener('click', function(e) {
+            e.preventDefault();
+            showPage(1);
+        });
+
+        page2Btn.addEventListener('click', function(e) {
+            e.preventDefault();
+            showPage(2);
+        });
+
+        nextPageBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            showPage(2);
+        });
+
+        prevPageBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            showPage(1);
+        });
+    }
+</script>
+
+</body>
+</html>

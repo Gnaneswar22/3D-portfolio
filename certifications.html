@@ -3,9 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Certifications</title>
+    <title>Certifications - Gnaneswar</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
     <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+    <link rel="stylesheet" href="css/style.css">
     <style>
         * {
             margin: 0;
@@ -95,22 +96,6 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
-        }
-
-        /* CURSOR ANIMATION - Enhanced */
-        .trail {
-            position: absolute;
-            border-radius: 50%;
-            pointer-events: none;
-            z-index: 9999;
-            animation: fadeTrail 1.2s ease-out forwards;
-            box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
-        }
-
-        @keyframes fadeTrail {
-            0% { transform: scale(1); opacity: 1; }
-            50% { opacity: 0.7; }
-            100% { transform: scale(0.3); opacity: 0; }
         }
 
         /* Side Navigation */
@@ -287,48 +272,7 @@
             visibility: visible;
         }
 
-
-        /* Mobile Profile Section */
-        .mobile-profile-section {
-            display: none;
-            align-items: center;
-            padding: 20px;
-            background: linear-gradient(to right, rgba(127, 66, 167, 0.2), rgba(102, 0, 197, 0.2));
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .mobile-profile-pic {
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            overflow: hidden;
-            border: 2px solid rgba(127, 66, 167, 0.5);
-            background: linear-gradient(135deg, #7f42a7, #6600c5);
-            margin-right: 15px;
-        }
-
-        .mobile-profile-pic img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        .mobile-profile-info {
-            flex: 1;
-        }
-
-        .mobile-profile-name {
-            font-weight: 600;
-            font-size: 1.1rem;
-            margin-bottom: 3px;
-        }
-
-        .mobile-profile-title {
-            font-size: 0.85rem;
-            color: #999;
-        }
-
-        /* Certifications Section */
+        /* Certifications Section - LinkedIn Style */
         .certifications-section {
             padding: 120px 20px 60px;
             background: linear-gradient(90deg, #000000 0%, #000000 50%, #1a1a1a 100%);
@@ -353,84 +297,197 @@
             background: linear-gradient(90deg, #7f42a7, #6600c5);
         }
 
-        .certifications-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 24px;
-            max-width: 1200px;
-            margin: auto;
+        /* LinkedIn-style certificate list */
+        .certifications-list {
+            max-width: 1000px;
+            margin: 0 auto;
             padding: 0 1rem;
         }
 
-        .certification-card {
-            background: rgba(25, 25, 25, 0.8);
-            backdrop-filter: blur(8px);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            border-radius: 16px;
-            padding: 20px;
-            box-shadow: 0 6px 25px rgba(0, 0, 0, 0.3);
+        .certification-item {
             display: flex;
-            flex-direction: column;
-            gap: 12px;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            margin-bottom: 40px;
+            padding-bottom: 40px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            align-items: flex-start;
         }
 
-        .certification-card:hover {
-            transform: translateY(-6px);
-            box-shadow: 0 12px 30px rgba(127, 66, 167, 0.2);
+        .certification-item:last-child {
+            border-bottom: none;
+        }
+
+        .certification-logo {
+            width: 70px;
+            height: 70px;
+            margin-right: 20px;
+            flex-shrink: 0;
+            background-color: #1a1a1a;
+            border-radius: 4px;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .certification-logo img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .certification-content {
+            flex: 1;
+            padding-right: 20px;
         }
 
         .certification-title {
             font-size: 1.25rem;
             font-weight: 600;
+            color: #f5f5f5;
+            margin-bottom: 5px;
         }
 
-        .certification-issuer,
+        .certification-subtitle {
+            font-size: 1.1rem;
+            color: #ccc;
+            margin-bottom: 8px;
+        }
+
+        .certification-issuer {
+            font-size: 1rem;
+            color: #aaa;
+            margin-bottom: 5px;
+        }
+
         .certification-date {
             font-size: 0.9rem;
-            color: #999;
-            display: flex;
-            gap: 8px;
-            align-items: center;
+            color: #888;
+            margin-bottom: 10px;
         }
 
-        .certification-description {
-            font-size: 0.95rem;
-            color: #ccc;
+        .certification-credential {
+            font-size: 0.9rem;
+            color: #888;
+            margin-bottom: 15px;
         }
 
         .certification-skills {
+            font-size: 0.95rem;
+            color: #aaa;
+            margin-top: 10px;
+        }
+
+        .certification-skills strong {
+            color: #ccc;
+        }
+
+        .certificate-preview {
+            width: 200px;
+            flex-shrink: 0;
+            margin-left: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 4px;
+            overflow: hidden;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+            position: relative;
+        }
+
+        .certificate-preview:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
+        }
+
+        .certificate-preview img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .certificate-preview::after {
+            content: 'Click to View';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(0, 0, 0, 0.7);
+            color: #fff;
+            padding: 5px;
+            font-size: 0.8rem;
+            text-align: center;
+            transform: translateY(100%);
+            transition: transform 0.3s ease;
+        }
+
+        .certificate-preview:hover::after {
+            transform: translateY(0);
+        }
+
+        /* Certificate Modal */
+        .certificate-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            z-index: 2000;
+            overflow: auto;
+        }
+
+        .certificate-modal-content {
             display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100%;
+            padding: 20px;
+            position: relative;
         }
 
-        .certification-skill {
-            background: rgba(127, 66, 167, 0.2);
-            border: 1px solid rgba(127, 66, 167, 0.5);
-            color: #ddd;
-            padding: 4px 10px;
-            border-radius: 20px;
-            font-size: 0.75rem;
+        .certificate-modal-image {
+            max-width: 90%;
+            max-height: 70vh;
+            object-fit: contain;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
         }
 
-        .credential-button {
+        .certificate-modal-close {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            color: #fff;
+            font-size: 30px;
+            cursor: pointer;
+            background: none;
+            border: none;
+            transition: color 0.3s ease;
+            z-index: 2001;
+        }
+
+        .certificate-modal-close:hover {
+            color: #7f42a7;
+        }
+
+        /* Clear, visible cancel button */
+        .certificate-modal-cancel {
+            margin-top: 20px;
+            padding: 10px 30px;
             background: linear-gradient(135deg, #7f42a7, #6600c5);
             color: white;
-            padding: 8px 16px;
-            border-radius: 25px;
-            font-size: 0.9rem;
-            align-self: flex-start;
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
+            border: none;
+            border-radius: 30px;
+            font-size: 1rem;
+            cursor: pointer;
             transition: all 0.3s ease;
-            text-decoration: none;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
         }
 
-        .credential-button:hover {
+        .certificate-modal-cancel:hover {
             transform: translateY(-3px);
-            box-shadow: 0 5px 15px rgba(127, 66, 167, 0.3);
+            box-shadow: 0 6px 20px rgba(126, 66, 167, 0.5);
         }
 
         .back-button {
@@ -458,23 +515,20 @@
         }
 
         /* Responsive adjustments */
-        @media (max-width: 1024px) {
-            .certifications-grid {
-                grid-template-columns: repeat(3, 1fr);
-            }
-        }
-
         @media (max-width: 768px) {
             header {
                 padding: 1rem 2rem;
             }
 
-            .certifications-grid {
-                grid-template-columns: repeat(2, 1fr);
+            .certification-item {
+                flex-direction: column;
             }
 
-            .mobile-profile-section {
-                display: flex;
+            .certificate-preview {
+                margin-left: 0;
+                margin-top: 20px;
+                width: 100%;
+                max-width: 250px;
             }
         }
 
@@ -485,10 +539,6 @@
 
             header h1 {
                 font-size: 1.5rem;
-            }
-
-            .certifications-grid {
-                grid-template-columns: 1fr;
             }
 
             .section-title {
@@ -525,25 +575,25 @@
             </div>
 
             <div class="side-nav-links">
-                <a href="#skills">Skills</a>
-                <a href="#education">Education</a>
-                <a href="#projects">Projects</a>
+                <a href="index.html">Home</a>
+                <a href="index.html#skills">Skills</a>
+                <a href="projects.html">Projects</a>
+                <a href="education.html">Education</a>
                 <div class="side-dropdown">
                     <a href="#" class="side-dropdown-toggle">
                         Experience
                         <span class="arrow">▼</span>
                     </a>
                     <div class="side-dropdown-content">
-                        <a href="certifications.html">Certifications</a>
+                        <a href="certifications.html" class="active">Certifications</a>
                         <a href="internships.html">Internships</a>
                         <a href="achievements.html">Achievements</a>
                     </div>
                 </div>
-                
             </div>
 
             <!-- Contact Button -->
-            <a href="contact.html" class="contact-button">Contact Me</a>
+            <a href="#contact" class="contact-button">Contact Me</a>
 
             <!-- Social Media Icons -->
             <div class="social-icons">
@@ -564,72 +614,91 @@
 
     </div>
 
-    <!-- Mobile Profile Section - shown on mobile only -->
-    <div class="mobile-profile-section" id="mobileProfile">
-        <div class="mobile-profile-pic">
-            <img src="https://cdn1.iconfinder.com/data/icons/user-pictures/100/unknown-512.png" alt="Profile">
+    <!-- Certificate Modals -->
+    <div class="certificate-modal" id="mitCertificateModal">
+        <button class="certificate-modal-close" onclick="closeModal('mitCertificateModal')">&times;</button>
+        <div class="certificate-modal-content">
+            <img src="certificates/1000015955.png" alt="Cloud Computing Certificate" class="certificate-modal-image">
+            <button class="certificate-modal-cancel" onclick="closeModal('mitCertificateModal')">Close</button>
         </div>
-        <div class="mobile-profile-info">
-            <div class="mobile-profile-name">Gnaneswar Damarasingu</div>
-            <div class="mobile-profile-title">Full Stack Developer</div>
+    </div>
+
+    <div class="certificate-modal" id="forageCertificateModal">
+        <button class="certificate-modal-close" onclick="closeModal('forageCertificateModal')">&times;</button>
+        <div class="certificate-modal-content">
+            <img src="certificates/Project Management Job Simulation.jpg" alt="Project Management Certificate" class="certificate-modal-image">
+            <button class="certificate-modal-cancel" onclick="closeModal('forageCertificateModal')">Close</button>
+        </div>
+    </div>
+
+    <div class="certificate-modal" id="pythonCertificateModal">
+        <button class="certificate-modal-close" onclick="closeModal('pythonCertificateModal')">&times;</button>
+        <div class="certificate-modal-content">
+            <img src="certificates/python_certificate.jpg" alt="Python Course Certificate" class="certificate-modal-image">
+            <button class="certificate-modal-cancel" onclick="closeModal('pythonCertificateModal')">Close</button>
         </div>
     </div>
 
     <!-- Certifications Section -->
     <section class="certifications-section">
-        <h2 class="section-title" data-aos="fade-down" data-aos-duration="1500">My Certifications</h2>
-        <div class="certifications-grid">
-            <div class="certification-card" data-aos="fade-up" data-aos-duration="1200" data-aos-delay="100">
-                <h3 class="certification-title">Full Stack Web Developer</h3>
-                <div class="certification-issuer"><i class="fas fa-graduation-cap"></i> LinkedIn</div>
-                <div class="certification-date"><i class="fas fa-calendar-alt"></i> Jan 2025</div>
-                <p class="certification-description">Built projects using React, Node.js and MongoDB.</p>
-                <div class="certification-skills">
-                    <span class="certification-skill">React</span>
-                    <span class="certification-skill">Node.js</span>
-                    <span class="certification-skill">MongoDB</span>
+        <h2 class="section-title" data-aos="fade-down" data-aos-duration="1500">Certifications</h2>
+        <div class="certifications-list">
+            <!-- Cloud Computing Certificate -->
+            <div class="certification-item" data-aos="fade-up">
+                <div class="certification-logo">
+                    <img src="logos/mit_logo.png" alt="MIT Services Logo">
                 </div>
-                <a href="certificates/fullstack.pdf" target="_blank" class="credential-button"><i class="fas fa-file-pdf"></i> Show Credential</a>
+                <div class="certification-content">
+                    <h3 class="certification-title">Cloud Computing</h3>
+                    <div class="certification-subtitle">Intern at Micro Information Technology Services.</div>
+                    <div class="certification-issuer">Micro Information Technology Services</div>
+                    <div class="certification-date">Issued May 2025</div>
+                    <div class="certification-credential">Credential ID MITS315833</div>
+                    <div class="certification-skills">
+                        <strong>Skills:</strong> Cloud Computing
+                    </div>
+                </div>
+                <div class="certificate-preview" onclick="openModal('mitCertificateModal')">
+                    <img src="certificates/1000015955.png" alt="Cloud Computing Certificate Preview">
+                </div>
             </div>
 
-            <div class="certification-card" data-aos="fade-up" data-aos-duration="1200" data-aos-delay="200">
-                <h3 class="certification-title">Machine Learning Specialist</h3>
-                <div class="certification-issuer"><i class="fas fa-graduation-cap"></i> Coursera</div>
-                <div class="certification-date"><i class="fas fa-calendar-alt"></i> Nov 2024</div>
-                <p class="certification-description">Completed advanced machine learning algorithms and neural networks.</p>
-                <div class="certification-skills">
-                    <span class="certification-skill">Python</span>
-                    <span class="certification-skill">TensorFlow</span>
-                    <span class="certification-skill">Neural Networks</span>
+            <!-- Project Management Certificate -->
+            <div class="certification-item" data-aos="fade-up" data-aos-delay="100">
+                <div class="certification-logo">
+                    <img src="logos/accenture_logo.png" alt="Accenture Logo">
                 </div>
-                <a href="certificates/ml.pdf" target="_blank" class="credential-button"><i class="fas fa-file-pdf"></i> Show Credential</a>
+                <div class="certification-content">
+                    <h3 class="certification-title">Project Management Job Simulation - Accenture</h3>
+                    <div class="certification-issuer">Forage</div>
+                    <div class="certification-date">Issued Apr 2025</div>
+                    <div class="certification-credential">Credential ID MzvkFMcQLiG3rzBFd</div>
+                    <div class="certification-skills">
+                        <strong>Skills:</strong> Project Management
+                    </div>
+                </div>
+                <div class="certificate-preview" onclick="openModal('forageCertificateModal')">
+                    <img src="certificates/Project Management Job Simulation.jpg" alt="Project Management Certificate Preview">
+                </div>
             </div>
-            
-            <div class="certification-card" data-aos="fade-up" data-aos-duration="1200" data-aos-delay="300">
-                <h3 class="certification-title">UI/UX Design</h3>
-                <div class="certification-issuer"><i class="fas fa-graduation-cap"></i> Udemy</div>
-                <div class="certification-date"><i class="fas fa-calendar-alt"></i> Aug 2024</div>
-                <p class="certification-description">Mastered user interface design principles and prototyping.</p>
-                <div class="certification-skills">
-                    <span class="certification-skill">Figma</span>
-                    <span class="certification-skill">Adobe XD</span>
-                    <span class="certification-skill">Wireframing</span>
+
+            <!-- Python Course Certificate -->
+            <div class="certification-item" data-aos="fade-up" data-aos-delay="200">
+                <div class="certification-logo">
+                    <img src="logos/udemy_logo.png" alt="Udemy Logo">
                 </div>
-                <a href="certificates/uiux.pdf" target="_blank" class="credential-button"><i class="fas fa-file-pdf"></i> Show Credential</a>
-            </div>
-            
-            <div class="certification-card" data-aos="fade-up" data-aos-duration="1200" data-aos-delay="400">
-                <h3 class="certification-title">Cloud Computing</h3>
-                <div class="certification-issuer"><i class="fas fa-graduation-cap"></i> AWS</div>
-                <div class="certification-date"><i class="fas fa-calendar-alt"></i> May 2024</div>
-                <p class="certification-description">Deployed and managed cloud infrastructure and services.</p>
-                <div class="certification-skills">
-                    <span class="certification-skill">AWS</span>
-                    <span class="certification-skill">EC2</span>
-                    <span class="certification-skill">S3</span>
-                    <span class="certification-skill">Lambda</span>
+                <div class="certification-content">
+                    <h3 class="certification-title">Python Complete Course: with 30+ Hands-on Tasks and Solution</h3>
+                    <div class="certification-issuer">Udemy</div>
+                    <div class="certification-date">Issued Feb 2025</div>
+                    <div class="certification-credential">Credential ID UC-252c8b9a-7701-4f4d-a646-360fa8793a0d</div>
+                    <div class="certification-skills">
+                        <strong>Skills:</strong> Python
+                    </div>
                 </div>
-                <a href="certificates/cloud.pdf" target="_blank" class="credential-button"><i class="fas fa-file-pdf"></i> Show Credential</a>
+                <div class="certificate-preview" onclick="openModal('pythonCertificateModal')">
+                    <img src="certificates/python_certificate.jpg" alt="Python Course Certificate Preview">
+                </div>
             </div>
         </div>
     </section>
@@ -639,7 +708,7 @@
 
     <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
     <script>
-        // Initialize AOS with longer durations
+        // Initialize AOS
         AOS.init({
             duration: 1000,
             easing: 'ease-out',
@@ -647,10 +716,33 @@
             startEvent: 'DOMContentLoaded'
         });
         
+        // Modal functions
+        function openModal(modalId) {
+            document.getElementById(modalId).style.display = "block";
+            document.body.style.overflow = "hidden"; // Prevent scrolling
+        }
+
+        function closeModal(modalId) {
+            document.getElementById(modalId).style.display = "none";
+            document.body.style.overflow = ""; // Restore scrolling
+        }
+        
+        // Close modal with Escape key
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape') {
+                const modals = document.getElementsByClassName("certificate-modal");
+                for (let i = 0; i < modals.length; i++) {
+                    if (modals[i].style.display === 'block') {
+                        modals[i].style.display = 'none';
+                    }
+                }
+                document.body.style.overflow = ""; // Restore scrolling
+            }
+        });
+        
         // Side Navigation Setup
         document.addEventListener('DOMContentLoaded', function() {
             const profileIcon = document.getElementById('profileIcon');
-            const mobileProfile = document.getElementById('mobileProfile');
             const sideNav = document.getElementById('sideNav');
             const sideNavClose = document.getElementById('sideNavClose');
             const navOverlay = document.getElementById('navOverlay');
@@ -660,15 +752,6 @@
             // Open side nav when profile icon is clicked
             if (profileIcon) {
                 profileIcon.addEventListener('click', function() {
-                    sideNav.classList.add('active');
-                    navOverlay.classList.add('active');
-                    document.body.style.overflow = 'hidden';
-                });
-            }
-            
-            // Open side nav when mobile profile is clicked
-            if (mobileProfile) {
-                mobileProfile.addEventListener('click', function() {
                     sideNav.classList.add('active');
                     navOverlay.classList.add('active');
                     document.body.style.overflow = 'hidden';
@@ -700,39 +783,11 @@
                     sideDropdown.classList.toggle('active');
                 });
             }
-            
-            // Cursor trail effect - enhanced for more visible trails
-            document.addEventListener("mousemove", function(e) {
-                // Increased frequency of trail creation
-                if (Math.random() > 0.4) {
-                    const trail = document.createElement("div");
-                    trail.className = "trail";
-                    
-                    // Increased size range for more visible trails
-                    const size = Math.random() * 8 + 5;
-                    
-                    // More vibrant colors with higher opacity
-                    const colors = [
-                        'rgba(255, 255, 255, 0.7)', 
-                        'rgba(127, 66, 167, 0.7)', 
-                        'rgba(102, 0, 197, 0.7)',
-                        'rgba(200, 200, 255, 0.7)'
-                    ];
-                    
-                    trail.style.background = colors[Math.floor(Math.random() * colors.length)];
-                    trail.style.width = trail.style.height = `${size}px`;
-                    
-                    trail.style.left = `${e.pageX - size / 2}px`;
-                    trail.style.top = `${e.pageY - size / 2}px`;
-                    
-                    document.body.appendChild(trail);
-                    
-                    // Longer duration for trails to remain visible
-                    setTimeout(() => {
-                        trail.remove();
-                    }, 1200);
-                }
-            });
+
+            // Auto-expand the Experience dropdown since we're on a page within it
+            if (sideDropdown) {
+                sideDropdown.classList.add('active');
+            }
         });
     </script>
 </body>
