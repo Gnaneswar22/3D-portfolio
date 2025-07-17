@@ -1564,6 +1564,7 @@ main {
 
     .side-nav {
         width: 260px;
+        height: 100vh;
     }
 }
 
@@ -1572,4 +1573,13 @@ spline-viewer::part(watermark) {
     display: none !important;
     opacity: 0 !important;
     visibility: hidden !important;
+}
+
+
+
+
+
+
+
+
 }
