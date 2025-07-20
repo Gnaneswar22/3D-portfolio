@@ -513,9 +513,34 @@
             transform: translateY(-3px);
             box-shadow: 0 5px 15px rgba(126, 66, 167, 0.3);
         }
+        
+        .contact-form-container button:disabled {
+            background: #555;
+            cursor: not-allowed;
+        }
 
         .contact-form-container button i {
             font-size: 1.1rem;
+        }
+        
+        /* NEW: Style for the form status message */
+        #form-status {
+            margin-top: 15px;
+            padding: 10px;
+            border-radius: 5px;
+            text-align: center;
+            font-weight: 500;
+            display: none; /* Hidden by default */
+        }
+        #form-status.success {
+            background-color: rgba(40, 167, 69, 0.2);
+            color: #28a745;
+            display: block;
+        }
+        #form-status.error {
+            background-color: rgba(220, 53, 69, 0.2);
+            color: #dc3545;
+            display: block;
         }
 
         .back-button {
@@ -629,13 +654,11 @@
         <header>
             <h1 data-aos="fade-down" data-aos-duration="1500" class="logo">Gnaneswar</h1>
 
-            <!-- Profile Icon -->
             <div class="profile-icon" id="profileIcon">
                 <img src="profile_icon.png" alt="Profile">
             </div>
         </header>
 
-        <!-- Side Navigation -->
         <div class="side-nav" id="sideNav">
             <div class="side-nav-header">
                 <div class="side-nav-logo">Gnaneswar</div>
@@ -646,7 +669,7 @@
 
             <div class="side-nav-links">
                 <a href="index.html">Home</a>
-             
+              
                 <a href="projects.html">Projects</a>
                 <a href="education.html">Education</a>
                 <div class="side-dropdown">
@@ -662,10 +685,8 @@
                 </div>
             </div>
 
-            <!-- Contact Button -->
             <a href="contact.html" class="contact-button">Contact Me</a>
 
-            <!-- Social Media Icons -->
             <div class="social-icons">
                 <a href="https://www.linkedin.com/in/gnaneswar-damarasingu/" target="_blank" aria-label="LinkedIn">
                     <i class="fab fa-linkedin-in"></i>
@@ -679,12 +700,10 @@
             </div>
         </div>
 
-        <!-- Overlay for side nav -->
         <div class="nav-overlay" id="navOverlay"></div>
 
     </div>
 
-    <!-- Mobile Profile Section - shown on mobile only -->
     <div class="mobile-profile-section" id="mobileProfile">
         <div class="mobile-profile-pic">
             <img src="https://cdn1.iconfinder.com/data/icons/user-pictures/100/unknown-512.png" alt="Profile">
@@ -695,7 +714,6 @@
         </div>
     </div>
 
-    <!-- Contact Section -->
     <section class="contact-section" id="contact">
         <h2 class="section-title" data-aos="fade-down" data-aos-duration="1500">Get In Touch</h2>
         
@@ -743,7 +761,7 @@
                     <a href="https://www.linkedin.com/in/gnaneswar-damarasingu/" target="_blank" aria-label="LinkedIn">
                         <i class="fab fa-linkedin-in"></i>
                     </a>
-                  
+                
                     <a href="https://instagram.com/username" target="_blank" aria-label="Instagram">
                         <i class="fab fa-instagram"></i>
                     </a>
@@ -751,7 +769,7 @@
             </div>
             
             <div class="contact-form-container" data-aos="fade-left" data-aos-duration="1200">
-                <form action="https://formspree.io/f/xkgbkjjqnd" method="POST">
+                <form id="contact-form" action="https://formspree.io/f/mqaledzj" method="POST">
                     <label for="name">Name:</label>
                     <input type="text" id="name" name="name" required />
                     
@@ -762,6 +780,8 @@
                     <textarea id="message" name="message" rows="5" required></textarea>
                     
                     <button type="submit">Send Message <i class="fas fa-paper-plane"></i></button>
+                    
+                    <div id="form-status"></div>
                 </form>
             </div>
         </div>
@@ -866,6 +886,55 @@
                 }
             });
         });
+
+        // ===============================================
+        // NEW: FormSpree Submission Handler
+        // ===============================================
+        const form = document.getElementById('contact-form');
+        const statusDiv = document.getElementById('form-status');
+
+        async function handleSubmit(event) {
+            event.preventDefault();
+            const data = new FormData(event.target);
+            const submitButton = form.querySelector('button[type="submit"]');
+
+            // Disable button to prevent multiple submissions
+            submitButton.disabled = true;
+            submitButton.innerHTML = 'Sending...';
+
+            fetch(event.target.action, {
+                method: form.method,
+                body: data,
+                headers: {
+                    'Accept': 'application/json'
+                }
+            }).then(response => {
+                if (response.ok) {
+                    statusDiv.innerHTML = "Thanks for your submission!";
+                    statusDiv.className = 'success';
+                    form.reset();
+                } else {
+                    response.json().then(data => {
+                        if (Object.hasOwn(data, 'errors')) {
+                            statusDiv.innerHTML = data["errors"].map(error => error["message"]).join(", ");
+                        } else {
+                            statusDiv.innerHTML = "Oops! There was a problem submitting your form";
+                        }
+                        statusDiv.className = 'error';
+                    })
+                }
+            }).catch(error => {
+                statusDiv.innerHTML = "Oops! There was a problem submitting your form";
+                statusDiv.className = 'error';
+            }).finally(() => {
+                // Re-enable button after a short delay
+                setTimeout(() => {
+                    submitButton.disabled = false;
+                    submitButton.innerHTML = 'Send Message <i class="fas fa-paper-plane"></i>';
+                }, 2000);
+            });
+        }
+        form.addEventListener("submit", handleSubmit)
     </script>
 </body>
 </html>
