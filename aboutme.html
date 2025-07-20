@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sebastián Jaramillo - Personal Website</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Dancing+Script:wght@700&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #ffffff;
+            color: #333;
+            overflow-x: hidden;
+        }
+        
+        .container {
+            display: flex;
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            height: 100vh;
+        }
+        
+        .left-section {
+            flex: 1;
+            background-color: #000000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .profile-img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+        }
+        
+        .right-section {
+            flex: 1;
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            background-color: #ffffff;
+        }
+        
+        .greeting {
+            color: #aaaaaa;
+            font-size: 12px;
+            font-weight: 300;
+            margin-bottom: 10px;
+            letter-spacing: 0.5px;
+        }
+        
+        .hello {
+            font-size: 72px;
+            font-weight: 700;
+            color: #888888;
+            margin-bottom: 0;
+            line-height: 1;
+            letter-spacing: -1px;
+        }
+        
+        .name {
+            font-size: 20px;
+            color: #888888;
+            margin-bottom: 40px;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+        }
+        
+        .job-title {
+            color: #3498db;
+            font-size: 18px;
+            font-weight: 500;
+            margin-bottom: 20px;
+            line-height: 1.4;
+            letter-spacing: 0.5px;
+        }
+        
+        .aka {
+            display: flex;
+            align-items: center;
+            margin-bottom: 40px;
+        }
+        
+        .aka span {
+            color: #aaaaaa;
+            font-size: 14px;
+            margin-right: 15px;
+        }
+        
+        .nickname {
+            font-family: 'Dancing Script', cursive;
+            color: #3498db;
+            font-size: 36px;
+            font-weight: 700;
+        }
+        
+        .thank-you-langs {
+            color: #aaaaaa;
+            font-size: 12px;
+            font-weight: 300;
+            margin-bottom: 10px;
+            letter-spacing: 0.5px;
+        }
+        
+        .thank-you {
+            font-size: 32px;
+            color: #888888;
+            margin-bottom: 5px;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+        }
+        
+        .thank-you-message {
+            color: #aaaaaa;
+            font-size: 13px;
+            margin-bottom: 40px;
+            font-weight: 400;
+        }
+        
+        .connect {
+            margin-top: 10px;
+        }
+        
+        .connect p {
+            color: #888888;
+            font-size: 14px;
+            margin-bottom: 10px;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+        }
+        
+        .connect span {
+            font-size: 11px;
+            color: #aaaaaa;
+            font-weight: 300;
+        }
+        
+        .social-icons {
+            display: flex;
+            margin-top: 10px;
+        }
+        
+        .social-icon {
+            width: 32px;
+            height: 32px;
+            background-color: #eeeeee;
+            border-radius: 3px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 10px;
+            color: #888888;
+            font-size: 14px;
+            font-weight: 500;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="left-section">
+            <img src="profile.jpg" alt="Sebastián Jaramillo" class="profile-img">
+        </div>
+        <div class="right-section">
+            <div class="greeting">hola, bonjour, ciao, hallo, 你好, こんにちは</div>
+            <h1 class="hello">HELLO!</h1>
+            <div class="name">MY NAME IS SEBASTIÁN JARAMILLO</div>
+            
+            <div class="job-title">I AM A CREATIVE<br>WEB DEVELOPER<br>&amp; UI DESIGNER</div>
+            
+            <div class="aka">
+                <span>a.k.a.</span>
+                <div class="nickname">Sebastiánjt</div>
+            </div>
+            
+            <div class="thank-you-langs">gracias, merci, grazie, dank u, obrigado, tak, 謝謝, ありがとう, धन्यवाद, Спасибо</div>
+            <div class="thank-you">THANK YOU SO MUCH</div>
+            <div class="thank-you-message">FOR VISITING MY SITE. YOU ARE AWESOME!</div>
+            
+            <div class="connect">
+                <p>CONNECT WITH ME <span>ON THESE SOCIAL NETWORKS</span></p>
+                <div class="social-icons">
+                    <div class="social-icon">in</div>
+                    <div class="social-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24">
+                            <path fill="#888888" d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.6 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z"/>
+                        </svg>
+                    </div>
+                    <div class="social-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24">
+                            <path fill="#888888" d="M12 2c2.757 0 5 2.243 5 5.001 0 2.756-2.243 5-5 5s-5-2.244-5-5c0-2.758 2.243-5.001 5-5.001zm0-2c-3.866 0-7 3.134-7 7.001 0 3.865 3.134 7 7 7s7-3.135 7-7c0-3.867-3.134-7.001-7-7.001zm6.369 13.353c-.497.498-1.057.931-1.658 1.302 2.872 1.874 4.378 5.083 4.972 7.346h-19.387c.572-2.29 2.058-5.503 4.973-7.358-.603-.374-1.162-.811-1.658-1.312-4.258 3.072-5.611 8.506-5.611 10.669h24c0-2.142-1.44-7.557-5.631-10.647z"/>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const socialIcons = document.querySelectorAll('.social-icon');
+            
+            socialIcons.forEach(icon => {
+                icon.addEventListener('mouseover', function() {
+                    this.style.backgroundColor = '#3498db';
+                    this.style.color = '#ffffff';
+                    const svgPath = this.querySelector('svg path');
+                    if (svgPath) {
+                        svgPath.setAttribute('fill', '#ffffff');
+                    }
+                });
+                
+                icon.addEventListener('mouseout', function() {
+                    this.style.backgroundColor = '#eeeeee';
+                    this.style.color = '#888888';
+                    const svgPath = this.querySelector('svg path');
+                    if (svgPath) {
+                        svgPath.setAttribute('fill', '#888888');
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
